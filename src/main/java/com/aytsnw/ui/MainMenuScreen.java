@@ -31,6 +31,22 @@ public class MainMenuScreen extends Screen{
         mainLoop();
     }
 
+    private void mainLoop(){
+        while (true){
+            drawHeader();
+            int choice;
+            displayOptions();
+            try {
+                choice = getChoice();
+            } catch (InvalidInputException ex){
+                System.out.println(ex.getMessage());
+                continue;
+            }
+            ScreenAlternator.alternateScreen(ScreenAlternator.screens.get(choice));
+            return;
+        }
+    }
+
     @Override
     void drawHeader(){
         drawEdge();
@@ -63,22 +79,6 @@ public class MainMenuScreen extends Screen{
         } catch (NoSuchElementException | InvalidInputException ex) {
             scan.nextLine();
             throw new InvalidInputException("Invalid input. You must type a valid option.");
-        }
-    }
-
-    private void mainLoop(){
-        while (true){
-            drawHeader();
-            int choice;
-            displayOptions();
-            try {
-                choice = getChoice();
-            } catch (InvalidInputException ex){
-               System.out.println(ex.getMessage());
-               continue;
-            }
-            ScreenAlternator.alternateScreen(ScreenAlternator.screens.get(choice));
-            return;
         }
     }
 }
