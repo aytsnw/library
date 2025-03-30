@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import static java.lang.System.in;
-
 public class MainMenuScreen extends Screen{
 
     static ArrayList<String> options = new ArrayList<>();
@@ -37,7 +35,7 @@ public class MainMenuScreen extends Screen{
             int choice;
             displayOptions();
             try {
-                choice = getChoice();
+                choice = getChoice(scan);
             } catch (InvalidInputException ex){
                 System.out.println(ex.getMessage());
                 continue;
@@ -62,23 +60,5 @@ public class MainMenuScreen extends Screen{
         }
         System.out.println();
         System.out.print("0. Exit");
-    }
-
-    private void validateChoice(int choice) throws InvalidInputException{
-        if (choice < 0 || choice > options.size()){
-            throw new InvalidInputException();
-        }
-    }
-
-    private int getChoice() throws InvalidInputException{
-        try {
-            int choice = scan.nextInt();
-            validateChoice(choice);
-            scan.nextLine();
-            return choice;
-        } catch (NoSuchElementException | InvalidInputException ex) {
-            scan.nextLine();
-            throw new InvalidInputException("Invalid input. You must type a valid option.");
-        }
     }
 }
