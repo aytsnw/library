@@ -11,7 +11,7 @@ public class ScreenAlternator {
     public static void alternateScreen(Screen screen){
         if (currentScreen == null){
             prevScreen = screen;
-        } else {
+        } else if (!(currentScreen.screenCode == -1)){
             prevScreen = currentScreen;
         }
         currentScreen = screen;

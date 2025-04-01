@@ -1,9 +1,9 @@
 package com.aytsnw.app;
 
-import com.aytsnw.ui.ExitScreen;
-import com.aytsnw.ui.MainMenuScreen;
-import com.aytsnw.ui.Screen;
-import com.aytsnw.ui.ScreenAlternator;
+import com.aytsnw.db.DbManager;
+import com.aytsnw.db.TableCreator;
+import com.aytsnw.ui.*;
+
 
 import static com.aytsnw.ui.ScreenAlternator.screens;
 
@@ -12,10 +12,23 @@ public class App {
         screens.put(screen.screenCode, screen);
     }
     static void initApp(){
+        System.out.println("Initializing application....");
+
         Screen mainMenu = new MainMenuScreen("main_menu", 5);
         Screen exit = new ExitScreen("exit", 0);
+        Screen decision = new DecisionMenuScreen("decision_menu", -1);
+        Screen addBook = new AddBookScreen("add_book", 1);
         addScreen(mainMenu);
         addScreen(exit);
+        addScreen(addBook);
+        addScreen(decision);
+
+        DbManager.init();
+
+        TableCreator.createBooksTable();
+        TableCreator.createUsersTable();
+        TableCreator.createTransactionsTable();
+
         ScreenAlternator.alternateScreen(mainMenu);
     }
     public static void main(String[] args){

@@ -8,12 +8,14 @@ import java.util.Scanner;
 
 public class MainMenuScreen extends Screen{
 
-    static ArrayList<String> options = new ArrayList<>();
+    ArrayList<String> options = new ArrayList<>();
+    int optionsSize;
     Scanner scan;
 
     public MainMenuScreen(String name, Integer code){
         super(name, code);
         scan = new Scanner(System.in);
+        initMap();
     }
 
     private void initMap(){
@@ -21,12 +23,32 @@ public class MainMenuScreen extends Screen{
         options.add("Remove book");
         options.add("Borrow book");
         options.add("Return book");
+        optionsSize = options.size();
     }
 
     @Override
     public void display(){
-        initMap();
         mainLoop();
+    }
+
+    private int getOptionsSize(){return optionsSize;}
+
+    private void validateChoice(int choice) throws InvalidInputException {
+        if (choice < 0 || choice > getOptionsSize()){
+            throw new InvalidInputException();
+        }
+    }
+
+    int getChoice(Scanner scan) throws InvalidInputException{
+        try {
+            int choice = scan.nextInt();
+            validateChoice(choice);
+            scan.nextLine();
+            return choice;
+        } catch (NoSuchElementException | InvalidInputException ex) {
+            scan.nextLine();
+            throw new InvalidInputException("Invalid input. You must type a valid option.");
+        }
     }
 
     private void mainLoop(){
@@ -47,6 +69,7 @@ public class MainMenuScreen extends Screen{
 
     @Override
     void drawHeader(){
+        System.out.println();
         drawEdge();
         System.out.print("--- Main Menu ---");
         System.out.println("\n");
