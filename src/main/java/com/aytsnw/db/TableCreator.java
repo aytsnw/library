@@ -8,7 +8,7 @@ public class TableCreator {
             DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books ("+
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                     "title TEXT," +
-                    "isbn INTEGER NOT NULL,"+
+                    "isbn BIGINT NOT NULL,"+
                     "author TEXT," +
                     "publisher TEXT," +
                     "year INTEGER NOT NULL," +

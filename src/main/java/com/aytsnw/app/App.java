@@ -3,7 +3,7 @@ package com.aytsnw.app;
 import com.aytsnw.db.DbManager;
 import com.aytsnw.db.TableCreator;
 import com.aytsnw.ui.*;
-
+import java.sql.SQLException;
 
 import static com.aytsnw.ui.ScreenAlternator.screens;
 
@@ -23,7 +23,12 @@ public class App {
         addScreen(addBook);
         addScreen(decision);
 
-        DbManager.init();
+        try{
+            DbManager.init();
+        } catch (SQLException e) {
+            System.out.println("Terminating process due to SQL Error...");
+            System.exit(1);
+        }
 
         TableCreator.createBooksTable();
         TableCreator.createUsersTable();

@@ -22,44 +22,43 @@ public class AddBookScreen extends Screen{
     }
 
     private void mainLoop(){
-        while(true){
-            System.out.print("Title: ");
-            String title = scan.nextLine();
-            columns.put("title", title);
-            System.out.print("Author: ");
-            String author = scan.nextLine();
-            columns.put("author", author);
-            System.out.print("ISBN: ");
-            Integer isbn = null;
-            try {
-                isbn = Integer.parseInt(scan.nextLine());
-                columns.put("isbn", isbn);
-            } catch (NumberFormatException ex){
-                System.out.print("Invalid ISBN number!");
-                callDecisionMenu();
-                return;
-            }
-            System.out.print("Publisher: ");
-            String publisher = scan.nextLine();
-            columns.put("publisher", publisher);
-            System.out.print("Year published: ");
-            Integer year = null;
-            try {
-                year = Integer.parseInt(scan.nextLine());
-                columns.put("year", year);
-            } catch (NumberFormatException ex) {
-                System.out.print("Invalid year!");
-                callDecisionMenu();
-            }
-
-            try{
-                writeToDB(columns);
-            } catch (SQLException ex){
-                System.out.println("SQL Error: Failed writing to table books.");
-                System.out.println(ex.getMessage());
-                callDecisionMenu();
-            }
+        System.out.print("Title: ");
+        String title = scan.nextLine();
+        columns.put("title", title);
+        System.out.print("Author: ");
+        String author = scan.nextLine();
+        columns.put("author", author);
+        System.out.print("ISBN: ");
+        Long isbn = null;
+        try {
+            isbn = Long.parseLong(scan.nextLine());
+            columns.put("isbn", isbn);
+        } catch (NumberFormatException ex){
+            System.out.print("Invalid ISBN number!");
+            callDecisionMenu();
             return;
+        }
+        System.out.print("Publisher: ");
+        String publisher = scan.nextLine();
+        columns.put("publisher", publisher);
+        System.out.print("Year published: ");
+        Integer year = null;
+        try {
+            year = Integer.parseInt(scan.nextLine());
+            columns.put("year", year);
+        } catch (NumberFormatException ex) {
+            System.out.print("Invalid year!");
+            callDecisionMenu();
+        }
+
+        try{
+            writeToDB(columns);
+            System.out.println("Book added to database!");
+            callDecisionMenu();
+        } catch (SQLException ex){
+            System.out.println("SQL Error: Failed writing to table books.");
+            System.out.println(ex.getMessage());
+            callDecisionMenu();
         }
     }
 

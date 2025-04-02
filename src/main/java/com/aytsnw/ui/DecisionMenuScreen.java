@@ -13,7 +13,7 @@ public class DecisionMenuScreen extends Screen{
     void drawHeader() {
         System.out.println();
         drawEdge();
-        System.out.println("---Do you wish to continue operation?---");
+        System.out.println("--- Do you wish to continue operation? ---");
     }
 
     @Override

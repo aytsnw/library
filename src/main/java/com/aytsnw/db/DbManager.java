@@ -4,14 +4,14 @@ import javax.swing.text.TabExpander;
 import java.sql.*;
 
 public class DbManager {
-    private final static String url = "jdbc:mysql://localhost:3306/";
-    private final static String user = "root";
-    private final static String pass = "bibia!1307";
+    private final static String url = CredentialsManager.getUrl();
+    private final static String user = CredentialsManager.getUser();
+    private final static String pass = CredentialsManager.getPassword();
 
     public static Statement stmt = null;
     public static ResultSet rs = null;
 
-    public static void init(){
+    public static void init() throws SQLException{
         loadDriver();
         createConnection();
         createDb("library");
@@ -28,30 +28,33 @@ public class DbManager {
         }
     }
 
-    static void createConnection(){
+    static void createConnection() throws SQLException{
         try {
             System.out.println("Creating connection with MySQL Server...");
             Connection conn = DriverManager.getConnection(url, user, pass);
             stmt = conn.createStatement();
         } catch (SQLException ex){
             System.out.println("SQL Error: couldn't instantiate connection");
+            throw new SQLException();
         }
     }
 
-    private static void createDb(String dbName){
+    private static void createDb(String dbName) throws SQLException{
         try {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dbName);
             System.out.println("Database " + dbName + " created or already exists.");
-        } catch (SQLException ex){
+        } catch (SQLException | NullPointerException ex){
             System.out.println("SQL Error: Couldn't create database");
+            throw new SQLException();
         }
     }
 
-    private static void selectDb(String dbName){
+    private static void selectDb(String dbName) throws SQLException{
         try {
             stmt.executeUpdate("USE " + dbName);
         } catch (SQLException ex){
             System.out.println("SQL Error: Couldn't select database " + dbName);
+            throw new SQLException();
         }
     }
 
