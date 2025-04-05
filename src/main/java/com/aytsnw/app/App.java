@@ -14,13 +14,15 @@ public class App {
     static void initApp(){
         System.out.println("Initializing application....");
 
-        Screen mainMenu = new MainMenuScreen("main_menu", 5);
-        Screen exit = new ExitScreen("exit", 0);
-        Screen decision = new DecisionMenuScreen("decision_menu", -1);
-        Screen addBook = new AddBookScreen("add_book", 1);
+        Screen mainMenu = new MainMenuScreen("main_menu", "Main Menu", 5);
+        Screen exit = new ExitScreen("exit", "Exit", 0);
+        Screen decision = new DecisionMenuScreen("decision_menu", "Do you wish to continue?", -1);
+        Screen addBook = new AddBookScreen("add_book", "Add Book", 1);
+        Screen removeBook = new RemoveBookScreen("remove_book", "Remove Book", 2);
         addScreen(mainMenu);
         addScreen(exit);
         addScreen(addBook);
+        addScreen(removeBook);
         addScreen(decision);
 
         try{

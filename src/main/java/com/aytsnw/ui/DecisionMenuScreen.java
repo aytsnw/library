@@ -1,30 +1,32 @@
 package com.aytsnw.ui;
 
+import com.aytsnw.exceptions.InvalidInputException;
+
 import java.util.Scanner;
 
 public class DecisionMenuScreen extends Screen{
     Scanner scan = new Scanner(System.in);
 
-    public DecisionMenuScreen(String name, Integer code) {
-        super(name, code);
+    public DecisionMenuScreen(String name, String title, Integer code) {
+        super(name, title, code);
     }
 
     @Override
-    void drawHeader() {
-        System.out.println();
-        drawEdge();
-        System.out.println("--- Do you wish to continue operation? ---");
+    void fillOptions(){
+        options.add("Continue");
+        options.add("Return to Main Menu");
     }
 
     @Override
     public void display() {
         drawHeader();
-        System.out.println("1. Continue");
-        System.out.println("2. Return to main menu");
+        displayOptions();
         int choice;
         try{
             choice = Integer.parseInt(scan.nextLine());
-        } catch (NumberFormatException ex){
+            System.out.println("Your choice: " + choice);
+            validateChoice(choice, 1, getOptionsSize());
+        } catch (NumberFormatException | InvalidInputException ex){
             System.out.println("Invalid choice!");
             refresh();
             return;

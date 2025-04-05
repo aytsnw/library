@@ -2,12 +2,13 @@ package com.aytsnw.ui;
 
 public class ExitScreen extends Screen{
 
-    public ExitScreen(String name, Integer code){
-        super(name, code);
+    public ExitScreen(String name, String title, Integer code){
+        super(name, title, code);
     }
 
     @Override
-    void drawHeader() {}
+    void fillOptions() {}
+
 
     @Override
     public void display() {}

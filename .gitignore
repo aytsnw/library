@@ -39,3 +39,6 @@ build/
 
 ### MySQL Local Server Credentials ###
 CredentialsManager.java
+
+### Current Goals ###
+goals.txt

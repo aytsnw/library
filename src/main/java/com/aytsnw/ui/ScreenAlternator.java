@@ -1,5 +1,6 @@
 package com.aytsnw.ui;
 
+import java.util.Currency;
 import java.util.HashMap;
 
 public class ScreenAlternator {

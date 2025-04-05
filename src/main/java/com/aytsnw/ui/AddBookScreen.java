@@ -10,16 +10,23 @@ public class AddBookScreen extends Screen{
     Scanner scan;
     HashMap<String, Object> columns = new HashMap<>();
 
-    public AddBookScreen(String name, Integer code){
-        super(name, code);
+    public AddBookScreen(String name, String title, Integer code){
+        super(name, title, code);
         scan = new Scanner(System.in);
     }
+
+    @Override
+    void fillOptions() {}
 
     @Override
     public void display() {
         drawHeader();
         mainLoop();
     }
+
+    @Override
+    void displayOptions(){}
+
 
     private void mainLoop(){
         System.out.print("Title: ");
@@ -64,17 +71,5 @@ public class AddBookScreen extends Screen{
 
     private void writeToDB(HashMap<String, Object> columns) throws SQLException {
         DbWriter.writeToBooks(columns);
-    }
-
-    @Override
-    void drawHeader(){
-        System.out.println();
-        drawEdge();
-        System.out.print("--- Add book ---");
-        System.out.println("\n");
-    }
-
-    private void callDecisionMenu(){
-        ScreenAlternator.alternateScreen(ScreenAlternator.screens.get(-1));
     }
 }
