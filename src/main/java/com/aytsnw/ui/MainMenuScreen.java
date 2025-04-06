@@ -20,7 +20,6 @@ public class MainMenuScreen extends Screen{
         options.add("Remove book");
         options.add("Borrow book");
         options.add("Return book");
-        optionsSize = options.size();
     }
 
     @Override

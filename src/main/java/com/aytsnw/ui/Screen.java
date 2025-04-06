@@ -13,16 +13,15 @@ public abstract class Screen {
     public Integer screenCode;
 
     ArrayList<String> options = new ArrayList<>();
-    int optionsSize;
 
     public Screen(String name, String title, Integer code){
         this.name = name;
         this.screenCode = code;
         this.title = title;
-        fillOptions();
+        this.fillOptions();
     }
 
-    int getOptionsSize(){return optionsSize;}
+    int getOptionsSize(){return options.size();}
 
     short getChoice(Scanner scan) throws InvalidInputException{
         try {
@@ -60,7 +59,8 @@ public abstract class Screen {
     }
 
     void validateChoice(int choice, int min, int max) throws InvalidInputException {
-        if (choice < min|| choice > max){
+        System.out.println("options size: " + max);
+        if (choice < min || choice > max){
             throw new InvalidInputException();
         }
     }

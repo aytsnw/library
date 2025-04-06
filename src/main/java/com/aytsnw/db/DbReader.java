@@ -9,10 +9,10 @@ public class DbReader {
         ArrayList<HashMap<String, Object>> rows = new ArrayList<>();
         HashMap<String, Object> row = new HashMap<>();
 
-        if (paramType == "title"){
+        if (paramType.equals("title")){
             DbManager.rs = DbManager.stmt.executeQuery(String.format("SELECT * FROM books WHERE title LIKE '%%%s%%'", param));
-        } else if ( paramType == "isbn"){
-            DbManager.rs = DbManager.stmt.executeQuery(String.format("SELECT * FROM books WHERE isbn = %d", isbn));
+        } else if ( paramType.equals("isbn")){
+            DbManager.rs = DbManager.stmt.executeQuery(String.format("SELECT * FROM books WHERE isbn = %d", param));
         }
 
         while (DbManager.rs.next()){

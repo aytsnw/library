@@ -1,12 +1,11 @@
 package com.aytsnw.db;
 
-import javax.swing.text.TabExpander;
 import java.sql.*;
 
 public class DbManager {
     private final static String url = CredentialsManager.getUrl();
     private final static String user = CredentialsManager.getUser();
-    private final static String pass = CredentialsManager.getPassword();
+    private final static String pass = CredentialsManager.getPass();
 
     public static Statement stmt = null;
     public static ResultSet rs = null;
