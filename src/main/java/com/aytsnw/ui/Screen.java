@@ -3,10 +3,12 @@ package com.aytsnw.ui;
 import com.aytsnw.exceptions.InvalidInputException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public abstract class Screen {
+    public static HashMap<String, Screen> screens = new HashMap<>();
 
     public String name;
     public String title;
@@ -16,9 +18,9 @@ public abstract class Screen {
 
     public Screen(String name, String title, Integer code){
         this.name = name;
-        this.screenCode = code;
         this.title = title;
         this.fillOptions();
+        screens.put(this.name, this);
     }
 
     int getOptionsSize(){return options.size();}
@@ -69,5 +71,5 @@ public abstract class Screen {
         ScreenAlternator.alternateScreen(ScreenAlternator.screens.get(-1));
     }
 
-    public abstract void display();
+    public abstract void display(HashMap<String, Object> params);
 }
