@@ -13,7 +13,13 @@ public abstract class Route {
         routes.put(name, this);
     }
 
+    abstract void init();
+
     public abstract void process(HashMap<String, Object> params);
 
+    public abstract void process();
+
     public abstract void renderScreen(HashMap<String, Object> params);
+
+    public abstract void renderScreen();
 }

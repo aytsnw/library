@@ -5,7 +5,7 @@ import java.sql.*;
 public class DbManager {
     private final static String url = CredentialsManager.getUrl();
     private final static String user = CredentialsManager.getUser();
-    private final static String pass = CredentialsManager.getPass();
+    private final static String pass = CredentialsManager.getPassword();
 
     public static Statement stmt = null;
     public static ResultSet rs = null;

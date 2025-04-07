@@ -1,75 +1,27 @@
 package com.aytsnw.ui;
 
-import com.aytsnw.exceptions.InvalidInputException;
-
-import java.util.ArrayList;
+import javax.swing.*;
 import java.util.HashMap;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
-public abstract class Screen {
-    public static HashMap<String, Screen> screens = new HashMap<>();
+public abstract  class Screen {
+    static HashMap<String, Screen> screens = new HashMap<>();
 
-    public String name;
-    public String title;
-    public Integer screenCode;
+    private String name;
+    RootWindow parent;
+    private String title;
 
-    ArrayList<String> options = new ArrayList<>();
-
-    public Screen(String name, String title, Integer code){
+    public Screen(String name, String title, RootWindow root){
         this.name = name;
         this.title = title;
-        this.fillOptions();
-        screens.put(this.name, this);
+        this.parent = root;
+        screens.put(name, this);
     }
 
-    int getOptionsSize(){return options.size();}
-
-    short getChoice(Scanner scan) throws InvalidInputException{
-        try {
-            short choice = Short.parseShort(scan.nextLine());
-            validateChoice(choice, 0, getOptionsSize());
-            return choice;
-        } catch (NoSuchElementException | InvalidInputException ex) {
-            throw new InvalidInputException("Invalid input. You must type a valid option.");
-        }
-    }
-
-    abstract void fillOptions();
-
-    private void drawEdge(){
-        System.out.println("---------------------------------------");
-    }
-
-    void refresh(){
-        ScreenAlternator.alternateScreen(ScreenAlternator.currentScreen);
-    }
-
-    void drawHeader(){
-        drawEdge();
-        System.out.println("----- " + this.title + " -----");
-    }
-
-    void displayOptions(){
-        int index = 1;
-        for (String option : options){
-            System.out.println(index + ". " + option);
-            index++;
-        }
-        System.out.println();
-        System.out.print("0. Exit");
-    }
-
-    void validateChoice(int choice, int min, int max) throws InvalidInputException {
-        System.out.println("options size: " + max);
-        if (choice < min || choice > max){
-            throw new InvalidInputException();
-        }
-    }
-
-    void callDecisionMenu(){
-        ScreenAlternator.alternateScreen(ScreenAlternator.screens.get(-1));
+    public void drawHeader(){
+        JLabel header = new JLabel(this.title);
+        parent.add(header);
     }
 
     public abstract void display(HashMap<String, Object> params);
+    public abstract void display();
 }

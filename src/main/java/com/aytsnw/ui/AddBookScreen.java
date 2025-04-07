@@ -1,75 +1,45 @@
 package com.aytsnw.ui;
 
-import com.aytsnw.db.DbWriter;
-
-import java.sql.SQLException;
-import java.util.Scanner;
+import javax.swing.*;
 import java.util.HashMap;
 
 public class AddBookScreen extends Screen{
-    Scanner scan;
-    HashMap<String, Object> columns = new HashMap<>();
-
-    public AddBookScreen(String name, String title, Integer code){
-        super(name, title, code);
-        scan = new Scanner(System.in);
+    public AddBookScreen(String name, String title, RootWindow root) {
+        super(name, title, root);
     }
 
     @Override
-    void fillOptions() {}
+    public void display(HashMap<String, Object> params) {
+        drawHeader();
+
+        JLabel titleLabel = new JLabel("Title");
+        JTextField titleEntry = new JTextField(20);
+        this.parent.add(titleLabel);
+        this.parent.add(titleEntry);
+
+        JLabel authorLabel = new JLabel("Author");
+        JTextField authorEntry = new JTextField(20);
+        this.parent.add(authorLabel);
+        this.parent.add(authorEntry);
+
+        JLabel isbnLabel = new JLabel("ISBN");
+        JTextField isbnEntry = new JTextField(20);
+        this.parent.add(isbnLabel);
+        this.parent.add(isbnEntry);
+
+        JLabel yearLabel = new JLabel("Publication year");
+        JTextField yearEntry = new JTextField(20);
+        this.parent.add(yearLabel);
+        this.parent.add(yearEntry);
+
+        JLabel categoryLabel = new JLabel("Category");
+        JTextField categoryEntry = new JTextField(20);
+        this.parent.add(categoryLabel);
+        this.parent.add(categoryEntry);
+    }
 
     @Override
     public void display() {
-        drawHeader();
-        mainLoop();
-    }
 
-    @Override
-    void displayOptions(){}
-
-
-    private void mainLoop(){
-        System.out.print("Title: ");
-        String title = scan.nextLine();
-        columns.put("title", title);
-        System.out.print("Author: ");
-        String author = scan.nextLine();
-        columns.put("author", author);
-        System.out.print("ISBN: ");
-        Long isbn = null;
-        try {
-            isbn = Long.parseLong(scan.nextLine());
-            columns.put("isbn", isbn);
-        } catch (NumberFormatException ex){
-            System.out.print("Invalid ISBN number!");
-            callDecisionMenu();
-            return;
-        }
-        System.out.print("Publisher: ");
-        String publisher = scan.nextLine();
-        columns.put("publisher", publisher);
-        System.out.print("Year published: ");
-        Integer year = null;
-        try {
-            year = Integer.parseInt(scan.nextLine());
-            columns.put("year", year);
-        } catch (NumberFormatException ex) {
-            System.out.print("Invalid year!");
-            callDecisionMenu();
-        }
-
-        try{
-            writeToDB(columns);
-            System.out.println("Book added to database!");
-            callDecisionMenu();
-        } catch (SQLException ex){
-            System.out.println("SQL Error: Failed writing to table books.");
-            System.out.println(ex.getMessage());
-            callDecisionMenu();
-        }
-    }
-
-    private void writeToDB(HashMap<String, Object> columns) throws SQLException {
-        DbWriter.writeToBooks(columns);
     }
 }

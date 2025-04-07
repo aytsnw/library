@@ -1,5 +1,6 @@
 package com.aytsnw.routes;
 
+import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.ui.ScreenDisplayer;
 
 import java.util.ArrayList;
@@ -13,21 +14,46 @@ public class IndexRoute extends Route{
     }
 
     void fillOptions(){
-        options.add("1. Add book");
-        options.add("2. Remove book");
-        options.add("3. Borrow book");
-        options.add("4. Return book");
+        options.add("Add book");
+        options.add("Remove book");
+        options.add("Borrow book");
+        options.add("Return book");
+        options.add("Exit");
+    }
+
+    @Override
+    void init(){
+        fillOptions();
     }
 
     @Override
     public void process(HashMap<String, Object> params) {
-        fillOptions();
+        init();
         elements.put("options", options);
         renderScreen(elements);
     }
 
     @Override
+    public void process() {
+        init();
+        elements.put("options", options);
+        renderScreen(elements);
+    }
+
+    void validateChoice(int choice, int min, int max) throws InvalidInputException {
+        System.out.println("options size: " + max);
+        if (choice < min || choice > max){
+            throw new InvalidInputException();
+        }
+    }
+
+    @Override
     public void renderScreen(HashMap<String, Object> params) {
-        ScreenDisplayer.display("main", params);
+        ScreenDisplayer.displayScreen("main", params);
+    }
+
+    @Override
+    public void renderScreen() {
+        ScreenDisplayer.displayScreen("main");
     }
 }
