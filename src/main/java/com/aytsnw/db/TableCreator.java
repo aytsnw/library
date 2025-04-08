@@ -8,12 +8,12 @@ public class TableCreator {
             DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books ("+
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                     "title TEXT," +
-                    "isbn BIGINT NOT NULL,"+
                     "author TEXT," +
+                    "isbn BIGINT NOT NULL,"+
                     "publisher TEXT," +
                     "year INTEGER NOT NULL," +
+                    "category TEXT," +
                     "loan_status TEXT NOT NULL)");
-
             System.out.println("Table: 'books' created or already exists.");
         } catch (SQLException ex){
             System.out.println("SQL Error: Couldn't create table: 'books'");

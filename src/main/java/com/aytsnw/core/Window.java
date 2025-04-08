@@ -1,4 +1,4 @@
-package com.aytsnw.ui;
+package com.aytsnw.core;
 
 
 import javax.swing.*;

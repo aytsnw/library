@@ -1,41 +1,81 @@
 package com.aytsnw.ui;
 
-import javax.swing.*;
-import java.util.HashMap;
+import com.aytsnw.core.Screen;
+import com.aytsnw.devices.Alternator;
+import com.aytsnw.windows.RootWindow;
 
-public class AddBookScreen extends Screen{
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
+public class AddBookScreen extends Screen {
+    HashMap<String, String> fields = null;
+    HashMap<String, JTextField> entries = new HashMap<>();
+
     public AddBookScreen(String name, String title, RootWindow root) {
         super(name, title, root);
     }
 
     @Override
-    public void display(HashMap<String, Object> params) {
+    public void display(HashMap<String, Object> routeParams) {
         drawHeader();
+        Object obj = routeParams.get("fields");
 
-        JLabel titleLabel = new JLabel("Title");
-        JTextField titleEntry = new JTextField(20);
-        this.parent.add(titleLabel);
-        this.parent.add(titleEntry);
+        try{
+            fields = (HashMap<String, String>) obj;
+        } catch (ClassCastException ex){
+            System.out.println("'fields' elements must be of type: 'String'.");
+            System.out.println(ex.getMessage());
+            return;
+        }
 
-        JLabel authorLabel = new JLabel("Author");
-        JTextField authorEntry = new JTextField(20);
-        this.parent.add(authorLabel);
-        this.parent.add(authorEntry);
+        JTextField title = createField("title", 20);
+        entries.put("title", title);
 
-        JLabel isbnLabel = new JLabel("ISBN");
-        JTextField isbnEntry = new JTextField(20);
-        this.parent.add(isbnLabel);
-        this.parent.add(isbnEntry);
+        JTextField author = createField("author", 20);
+        entries.put("author", author);
 
-        JLabel yearLabel = new JLabel("Publication year");
-        JTextField yearEntry = new JTextField(20);
-        this.parent.add(yearLabel);
-        this.parent.add(yearEntry);
+        JTextField isbn = createField("isbn", 20);
+        entries.put("isbn", isbn);
 
-        JLabel categoryLabel = new JLabel("Category");
-        JTextField categoryEntry = new JTextField(20);
-        this.parent.add(categoryLabel);
-        this.parent.add(categoryEntry);
+        JTextField publisher = createField("publisher", 20);
+        entries.put("publisher", publisher);
+
+        JTextField year = createField("year", 20);
+        entries.put("year", year);
+
+        JTextField category = createField("category", 20);
+        entries.put("category", category);
+
+        JButton submitBtn = new JButton();
+        this.parent.add(submitBtn);
+        bindRoute("add", submitBtn);
+    }
+
+    private JTextField createField(String fieldKey, int width){
+        JLabel label = new JLabel(fields.get(fieldKey));
+        JTextField entry = new JTextField(width);
+        this.parent.add(entry);
+        this.parent.add(label);
+        return entry;
+    }
+
+    private void bindRoute(String routeName, JButton btn){
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HashMap<String, String> values = new HashMap<>();
+                values.put("title", entries.get("title").getText());
+                values.put("author", entries.get("author").getText());
+                values.put("isbn", entries.get("isbn").getText());
+                values.put("publisher", entries.get("publisher").getText());
+                values.put("year", entries.get("year").getText());
+                values.put("category", entries.get("category").getText());
+                Alternator.alternateRoute(routeName, values);
+            }
+        });
     }
 
     @Override

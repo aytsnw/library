@@ -1,9 +1,8 @@
 package com.aytsnw.ui;
 
-
-
-import com.aytsnw.routes.Alternator;
-import com.aytsnw.routes.Route;
+import com.aytsnw.core.Screen;
+import com.aytsnw.devices.Alternator;
+import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,19 +11,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class MainMenuScreen extends Screen{
+public class MainMenuScreen extends Screen {
+
+    private ArrayList<String> options = null;
 
     public MainMenuScreen(String name, String title, RootWindow root){
         super(name, title, root);
     }
 
     @Override
-    public void display(HashMap<String, Object> params) {
+    public void display(HashMap<String, Object> routeParams) {
         drawHeader();
-        ArrayList<String> options = null;
-
         try{
-            options = (ArrayList<String>) params.get("options");
+            options = (ArrayList<String>) routeParams.get("options");
         } catch (ClassCastException ex){
             System.out.println("'options' elements must be of type: 'String'.");
             System.out.println(ex.getMessage());
@@ -32,31 +31,11 @@ public class MainMenuScreen extends Screen{
         }
 
         try{
-            JButton addBookBtn = new JButton();
-            addBookBtn.setText(options.get(0));
-            bindRoute("add", addBookBtn);
-            this.parent.add(addBookBtn);
-
-            JButton rmvBookBtn = new JButton();
-            rmvBookBtn.setText(options.get(1));
-            bindRoute("remove", rmvBookBtn);
-            this.parent.add(rmvBookBtn);
-
-            JButton brwBookBtn = new JButton();
-            brwBookBtn .setText(options.get(2));
-            bindRoute("borrow", brwBookBtn);
-            this.parent.add(brwBookBtn);
-
-            JButton retBookBtn = new JButton();
-            retBookBtn.setText(options.get(3));
-            bindRoute("return", retBookBtn);
-            this.parent.add(retBookBtn);
-
-            JButton exitBtn = new JButton();
-            exitBtn.setText(options.get(4));
-            bindRoute("exit", exitBtn);
-            this.parent.add(exitBtn);
-
+            createBtn(0, "add");
+            createBtn(1, "remove");
+            createBtn(2, "borrow");
+            createBtn(3, "return");
+            createBtn(4, "exit");
         } catch (NullPointerException ex){
             System.out.print("'options' list not initialized.");
             System.out.println(ex.getMessage());
@@ -72,8 +51,13 @@ public class MainMenuScreen extends Screen{
         });
     }
 
-    @Override
-    public void display() {
-        drawHeader();
+    private void createBtn(int optionIndex, String routeName){
+        JButton btn = new JButton();
+        btn.setText(options.get(optionIndex));
+        bindRoute(routeName, btn);
+        this.parent.add(btn);
     }
+
+    @Override
+    public void display() {drawHeader();}
 }

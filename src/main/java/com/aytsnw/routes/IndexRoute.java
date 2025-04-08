@@ -1,12 +1,13 @@
 package com.aytsnw.routes;
 
+import com.aytsnw.core.Route;
 import com.aytsnw.exceptions.InvalidInputException;
-import com.aytsnw.ui.ScreenDisplayer;
+import com.aytsnw.devices.ScreenDisplayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IndexRoute extends Route{
+public class IndexRoute extends Route {
     ArrayList<String> options = new ArrayList<>();
 
     public IndexRoute(String name) {
@@ -22,22 +23,22 @@ public class IndexRoute extends Route{
     }
 
     @Override
-    void init(){
+    protected void init(){
         fillOptions();
     }
 
     @Override
-    public void process(HashMap<String, Object> params) {
+    public void process(HashMap<String, String> screenParams) {
         init();
         elements.put("options", options);
-        renderScreen(elements);
+        renderScreen("main", elements);
     }
 
     @Override
     public void process() {
         init();
         elements.put("options", options);
-        renderScreen(elements);
+        renderScreen("main", elements);
     }
 
     void validateChoice(int choice, int min, int max) throws InvalidInputException {
@@ -48,8 +49,8 @@ public class IndexRoute extends Route{
     }
 
     @Override
-    public void renderScreen(HashMap<String, Object> params) {
-        ScreenDisplayer.displayScreen("main", params);
+    public void renderScreen(String screenName, HashMap<String, Object> innerParams) {
+        ScreenDisplayer.displayScreen("main", innerParams);
     }
 
     @Override

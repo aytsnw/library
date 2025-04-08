@@ -1,6 +1,8 @@
-package com.aytsnw.ui;
+package com.aytsnw.devices;
 
-import javax.swing.*;
+import com.aytsnw.windows.RootWindow;
+import com.aytsnw.core.Screen;
+
 import java.awt.*;
 import java.util.HashMap;
 
