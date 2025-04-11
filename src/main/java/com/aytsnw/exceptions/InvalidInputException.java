@@ -2,7 +2,7 @@ package com.aytsnw.exceptions;
 
 public class InvalidInputException extends RuntimeException {
     public InvalidInputException() {
-      super("Invalid input");
+      super("Invalid input.");
     }
 
     public InvalidInputException(String message) {

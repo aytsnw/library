@@ -33,6 +33,7 @@ public class App {
 
         AddBookRoute addRoute = new AddBookRoute("add");
         AddBookScreen addScreen = new AddBookScreen("add", "Add Book", ScreenDisplayer.getParent());
+        BookAddedScreen addedScreen = new BookAddedScreen("added", "Result", ScreenDisplayer.getParent());
 
         Alternator.alternateRoute("index");
 

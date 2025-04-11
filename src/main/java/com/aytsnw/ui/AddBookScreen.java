@@ -66,7 +66,7 @@ public class AddBookScreen extends Screen {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<String, String> values = new HashMap<>();
+                HashMap<String, Object> values = new HashMap<>();
                 values.put("title", entries.get("title").getText());
                 values.put("author", entries.get("author").getText());
                 values.put("isbn", entries.get("isbn").getText());

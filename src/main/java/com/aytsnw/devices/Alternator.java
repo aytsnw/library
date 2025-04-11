@@ -9,7 +9,7 @@ public class Alternator {
     static String currentRoute = null;
     static String prevRoute = null;
 
-    public static void alternateRoute(String routeName, HashMap<String, String> params){
+    public static void alternateRoute(String routeName, HashMap<String, Object> params){
         System.out.println("Calling route: '" + routeName + "'...");
         if (currentRoute == null){
             prevRoute = routeName;

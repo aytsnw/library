@@ -23,14 +23,22 @@ public class ScreenDisplayer {
 
     public static void displayScreen(String screenName, HashMap<String, Object> params){
         parent.getContentPane().removeAll();
-        Screen.screens.get(screenName).display(params);
+        try{
+            Screen.screens.get(screenName).display(params);
+        } catch (NullPointerException ex){
+            System.out.println("Screen '" + screenName + "' not initialized.");
+        }
         parent.revalidate();
         parent.repaint();
     }
 
     public static void displayScreen(String screenName){
         parent.getContentPane().removeAll();
-        Screen.screens.get(screenName).display();
+        try {
+            Screen.screens.get(screenName).display();
+        } catch (NullPointerException ex){
+            System.out.println("Screen '" + screenName + "' not initialized.");
+        }
         parent.revalidate();
         parent.repaint();
     }

@@ -28,7 +28,7 @@ public class IndexRoute extends Route {
     }
 
     @Override
-    public void process(HashMap<String, String> screenParams) {
+    public void process(HashMap<String, Object> screenParams) {
         init();
         elements.put("options", options);
         renderScreen("main", elements);
@@ -54,7 +54,7 @@ public class IndexRoute extends Route {
     }
 
     @Override
-    public void renderScreen() {
+    public void renderScreen(String screeName) {
         ScreenDisplayer.displayScreen("main");
     }
 }
