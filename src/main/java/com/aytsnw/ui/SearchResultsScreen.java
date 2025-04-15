@@ -1,21 +1,16 @@
 package com.aytsnw.ui;
 
 import com.aytsnw.core.Screen;
-import com.aytsnw.db.DbManager;
-import com.aytsnw.db.DbReader;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SearchTitleScreen extends Screen {
+public class SearchResultsScreen extends Screen {
     HashMap<String, Object> elements = new HashMap<>();
 
-    public SearchTitleScreen(String name, String title, RootWindow root) {
+    public SearchResultsScreen(String name, String title, RootWindow root) {
         super(name, title, root);
     }
 

@@ -14,7 +14,7 @@ public class DbReader {
             System.out.println("Executing: " + query);
             DbManager.rs = DbManager.stmt.executeQuery(query);
         } else if (paramType.equals("isbn")){
-            String query = String.format("SELECT * FROM books WHERE isbn = %d", param);
+            String query = String.format("SELECT * FROM books WHERE isbn = %s", param);
             System.out.println("Executing: " + query);
             DbManager.rs = DbManager.stmt.executeQuery(query);
         } else {

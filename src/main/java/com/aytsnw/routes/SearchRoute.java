@@ -44,7 +44,7 @@ public class SearchRoute extends Route {
 
         elements.put("rows", rows);
 
-        renderScreen("search_results_title", elements);
+        renderScreen("search_results", elements);
     }
 
     @Override
