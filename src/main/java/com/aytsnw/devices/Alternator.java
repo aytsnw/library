@@ -20,7 +20,7 @@ public class Alternator {
         try{
             Route.routes.get(routeName).process(params);
         } catch (NullPointerException ex) {
-            System.out.println("Route not initialized");
+            System.out.println("Route '" + routeName + "' not initialized");
             System.out.println(ex.getMessage());
         }
     }

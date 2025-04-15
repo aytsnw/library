@@ -51,7 +51,7 @@ public class AddBookScreen extends Screen {
 
         JButton submitBtn = new JButton();
         this.parent.add(submitBtn);
-        bindRoute("add", submitBtn);
+        bindAction("add", submitBtn);
     }
 
     private JTextField createField(String fieldKey, int width){
@@ -62,7 +62,7 @@ public class AddBookScreen extends Screen {
         return entry;
     }
 
-    private void bindRoute(String routeName, JButton btn){
+     private void bindAction(String routeName, JButton btn){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

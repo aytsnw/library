@@ -18,4 +18,8 @@ public class DbWriter {
     public static void writeToUsers(HashMap<String, Object> columns) throws SQLException{
         DbManager.stmt.executeUpdate(String.format("INSERT INTO users (username) VALUES('%s')", columns.get("username")));
     }
+
+    public static void deleteFromBooks(String id) throws SQLException{
+        DbManager.stmt.executeUpdate("DELETE FROM books WHERE id = %s".formatted(id));
+    }
 }

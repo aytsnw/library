@@ -1,0 +1,49 @@
+package com.aytsnw.ui;
+
+import com.aytsnw.core.Screen;
+import com.aytsnw.db.DbManager;
+import com.aytsnw.db.DbReader;
+import com.aytsnw.windows.RootWindow;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class SearchTitleScreen extends Screen {
+    HashMap<String, Object> elements = new HashMap<>();
+
+    public SearchTitleScreen(String name, String title, RootWindow root) {
+        super(name, title, root);
+    }
+
+    @Override
+    public void display(HashMap<String, Object> routeParams) {
+        drawHeader();
+        for (HashMap<String, Object> row : (ArrayList<HashMap<String, Object>>) routeParams.get("rows")){
+            createBookFrame(row);
+            createRemoveBookButton((String) row.get("id"));
+        }
+    }
+
+    private void createBookFrame(HashMap<String, Object> elements){
+        addToParent(new JLabel((String) elements.get("title")));
+        addToParent(new JLabel((String) elements.get("author")));
+        addToParent(new JLabel(elements.get("isbn").toString()));
+        addToParent(new JLabel((String) elements.get("year")));
+        addToParent(new JLabel((String) elements.get("category")));
+        addToParent(new JLabel((String) elements.get("loan_status")));
+    }
+
+    private void createRemoveBookButton(String id){
+        JButton btn = new JButton("Remove from Library");
+        elements.put("id", id);
+        bindRoute("remove_book", btn, elements);
+        addToParent(btn);
+    }
+
+    @Override
+    public void display() {}
+}

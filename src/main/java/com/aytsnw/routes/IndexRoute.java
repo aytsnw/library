@@ -15,10 +15,8 @@ public class IndexRoute extends Route {
     }
 
     void fillOptions(){
-        options.add("Add book");
-        options.add("Remove book");
-        options.add("Borrow book");
-        options.add("Return book");
+        options.add("Add Book");
+        options.add("Search Book");
         options.add("Exit");
     }
 
@@ -39,13 +37,6 @@ public class IndexRoute extends Route {
         init();
         elements.put("options", options);
         renderScreen("main", elements);
-    }
-
-    void validateChoice(int choice, int min, int max) throws InvalidInputException {
-        System.out.println("options size: " + max);
-        if (choice < min || choice > max){
-            throw new InvalidInputException();
-        }
     }
 
     @Override

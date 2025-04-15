@@ -7,22 +7,32 @@ import java.util.HashMap;
 public class DbReader {
     public static ArrayList<HashMap<String, Object>> readFromBooks(String paramType, Object param) throws SQLException{
         ArrayList<HashMap<String, Object>> rows = new ArrayList<>();
-        HashMap<String, Object> row = new HashMap<>();
 
         if (paramType.equals("title")){
-            DbManager.rs = DbManager.stmt.executeQuery(String.format("SELECT * FROM books WHERE title LIKE '%%%s%%'", param));
-        } else if ( paramType.equals("isbn")){
-            DbManager.rs = DbManager.stmt.executeQuery(String.format("SELECT * FROM books WHERE isbn = %d", param));
+            System.out.println("Reading from books by title with: " + param);
+            String query = String.format("SELECT * FROM books WHERE title LIKE '%%%s%%'", param);
+            System.out.println("Executing: " + query);
+            DbManager.rs = DbManager.stmt.executeQuery(query);
+        } else if (paramType.equals("isbn")){
+            String query = String.format("SELECT * FROM books WHERE isbn = %d", param);
+            System.out.println("Executing: " + query);
+            DbManager.rs = DbManager.stmt.executeQuery(query);
+        } else {
+            System.out.println("Bad parameter type: '" + param + "'.");
         }
 
         while (DbManager.rs.next()){
-            row.put("Title", DbManager.rs.getString("title"));
-            row.put("Author", DbManager.rs.getString("author"));
-            row.put("ISBN", DbManager.rs.getLong("isbn"));
-            row.put("Year", DbManager.rs.getString("Year"));
+            HashMap<String, Object> row = new HashMap<>();
+            row.put("id", DbManager.rs.getString("id"));
+            row.put("title", DbManager.rs.getString("title"));
+            row.put("author", DbManager.rs.getString("author"));
+            row.put("isbn", DbManager.rs.getLong("isbn"));
+            row.put("year", DbManager.rs.getString("year"));
+            row.put("category", DbManager.rs.getString("category"));
+            row.put("loan_status", DbManager.rs.getString("loan_status"));
             rows.add(row);
-            row.clear();
         }
+
         return rows;
     }
 }

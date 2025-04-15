@@ -2,6 +2,7 @@ package com.aytsnw.core;
 
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public abstract class Window extends JFrame {

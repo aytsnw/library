@@ -4,6 +4,7 @@ import com.aytsnw.devices.Alternator;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -29,25 +30,45 @@ public abstract  class Screen {
     }
 
     private void drawNavBar(){
-        createButton("Main Menu", "index");
-        createButton("Return", "prev");
+        JButton mainBtn = createButton("Main Menu");
+        bindRoute("index", mainBtn);
+        JButton returnBtn = createButton("Return");
+        bindRoute("prev", returnBtn);
     }
 
-    JButton createButton(String text, String routeName){
+    public JButton createButton(String text){
         JButton btn = new JButton(text);
-        bindRoute(routeName, btn);
         this.parent.add(btn);
         return btn;
     }
 
-    private void bindRoute(String routeName, JButton btn){
+    public void bindRoute(String routeName, JButton btn){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!(routeName.equals("prev"))) Alternator.alternateRoute(routeName);
+                if (!(routeName.equals("prev"))) {
+                    System.out.println("Calling via route name");
+                    Alternator.alternateRoute(routeName);}
+                else {
+                    System.out.println("Calling via alternate prev");
+                    Alternator.alternatePrev();
+                }
+            }
+        });
+    }
+
+    public void bindRoute(String routeName, JButton btn, HashMap<String, Object> params){
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!(routeName.equals("prev"))) Alternator.alternateRoute(routeName, params);
                 else Alternator.alternatePrev();
             }
         });
+    }
+
+    public void addToParent(Component component){
+        this.parent.add(component);
     }
 
     public abstract void display(HashMap<String, Object> routeParams);
