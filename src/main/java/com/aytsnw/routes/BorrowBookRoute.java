@@ -7,8 +7,9 @@ import com.aytsnw.devices.ScreenDisplayer;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class RemoveBookRoute extends Route {
-    public RemoveBookRoute(String name) {
+public class BorrowBookRoute extends Route {
+
+    public BorrowBookRoute(String name) {
         super(name);
     }
 
@@ -18,21 +19,25 @@ public class RemoveBookRoute extends Route {
     @Override
     public void process(HashMap<String, Object> screenParams) {
         init();
+        String id = (String) screenParams.get("id");
         try{
-            DbWriter.deleteFromBooks((String) screenParams.get("id"));
+            DbWriter.updateLoanStatus(id, "borrow");
         } catch (SQLException ex){
-            System.out.println("SQL Error: couldn't delete from 'books' table");
+            System.out.println("SQL Error: Couldn't execute loan.");
             System.out.println(ex.getMessage());
-            elements.put("message", ex.getMessage());
-            renderScreen("remove_book", elements);
+            elements.put("message", "Failed to borrow book.");
+            renderScreen("book_borrowed", elements);
             return;
         }
-        elements.put("message", "Book removed successfully");
-        renderScreen("book_removed", elements);
+
+        elements.put("message", "Book borrowed!");
+        renderScreen("book_borrowed", elements);
     }
 
     @Override
-    public void process() {}
+    public void process() {
+        init();
+    }
 
     @Override
     protected void renderScreen(String screenName, HashMap<String, Object> innerParams) {

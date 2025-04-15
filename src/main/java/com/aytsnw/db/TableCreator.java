@@ -25,7 +25,8 @@ public class TableCreator {
         try{
             DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users ("+
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
-                    "username TEXT NOT NULL)");
+                    "username TEXT NOT NULL," +
+                    "password_hash TEXT NOT NULL)");
 
             System.out.println("Table: 'users' created or already exists.");
         } catch (SQLException ex){

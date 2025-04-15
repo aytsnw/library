@@ -22,4 +22,12 @@ public class DbWriter {
     public static void deleteFromBooks(String id) throws SQLException{
         DbManager.stmt.executeUpdate("DELETE FROM books WHERE id = %s".formatted(id));
     }
+
+    public static void updateLoanStatus(String id, String operation) throws SQLException{
+        if (operation.equals("borrow")){
+            DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'on_loan' WHERE id = %s".formatted(id));
+        } else if (operation.equals("return")){
+            DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'available' WHERE id = %s".formatted(id));
+        }
+    }
 }

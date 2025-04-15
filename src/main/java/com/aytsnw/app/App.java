@@ -4,11 +4,8 @@ import com.aytsnw.core.Screen;
 import com.aytsnw.db.DbManager;
 import com.aytsnw.db.TableCreator;
 import com.aytsnw.devices.ScreenDisplayer;
-import com.aytsnw.routes.AddBookRoute;
+import com.aytsnw.routes.*;
 import com.aytsnw.devices.Alternator;
-import com.aytsnw.routes.IndexRoute;
-import com.aytsnw.routes.RemoveBookRoute;
-import com.aytsnw.routes.SearchRoute;
 import com.aytsnw.ui.*;
 
 import javax.naming.directory.SearchResult;
@@ -46,6 +43,9 @@ public class App {
 
         RemoveBookRoute removeBookRoute = new RemoveBookRoute("remove_book");
         BookRemovedScreen bookRemovedScreen = new BookRemovedScreen("book_removed", "Book Deletion", ScreenDisplayer.getParent());
+
+        BorrowBookRoute borrowBookRoute = new BorrowBookRoute("borrow_book");
+        BookBorrowedScreen bookBorrowedScreen = new BookBorrowedScreen("book_borrowed", "Book Borrowing", ScreenDisplayer.getParent());
 
         Alternator.alternateRoute("index");
 

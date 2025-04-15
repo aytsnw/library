@@ -19,7 +19,9 @@ public class SearchResultsScreen extends Screen {
         drawHeader();
         for (HashMap<String, Object> row : (ArrayList<HashMap<String, Object>>) routeParams.get("rows")){
             createBookFrame(row);
-            createRemoveBookButton((String) row.get("id"));
+            String id = (String) row.get("id");
+            createRemoveBookButton(id);
+            createBorrowBookButton(id);
         }
     }
 
@@ -36,6 +38,13 @@ public class SearchResultsScreen extends Screen {
         JButton btn = new JButton("Remove from Library");
         elements.put("id", id);
         bindRoute("remove_book", btn, elements);
+        addToParent(btn);
+    }
+
+    private void createBorrowBookButton(String id){
+        JButton btn = new JButton("Borrow book");
+        elements.put("id", id);
+        bindRoute("borrow_book", btn, elements);
         addToParent(btn);
     }
 
