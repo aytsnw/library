@@ -16,11 +16,7 @@ public class SearchRoute extends Route {
     }
 
     @Override
-    protected void init() {}
-
-    @Override
     public void process(HashMap<String, Object> screenParams) {
-        init();
         String type = null;
         String entry = null;
         try {
@@ -47,5 +43,5 @@ public class SearchRoute extends Route {
     }
 
     @Override
-    public void process() {init();renderScreen("search_book");}
+    public void process() {renderScreen("search_book");}
 }

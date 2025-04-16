@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.function.Function;
+
 
 public class SearchScreen extends Screen {
 
@@ -24,12 +24,12 @@ public class SearchScreen extends Screen {
     public void display() {
         drawHeader();
         JTextField titleEntry = new JTextField(20);
-        this.parent.add(titleEntry);
+        addToParent(titleEntry);
         JButton searchTitleBtn = createButton("Search by Title");
         bindFormSubmitting("title", "search", searchTitleBtn, titleEntry);
 
         JTextField isbnEntry = new JTextField(20);
-        this.parent.add(isbnEntry);
+        addToParent(isbnEntry);
         JButton searchIsbn = createButton("Search by ISBN");
         bindFormSubmitting("isbn", "search", searchIsbn, isbnEntry);
     }
@@ -38,10 +38,9 @@ public class SearchScreen extends Screen {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<String, Object> params = new HashMap<>();
-                params.put("type", type);
-                params.put("entry", entry.getText());
-                Alternator.alternateRoute(routeName, params);
+                elements.put("type", type);
+                elements.put("entry", entry.getText());
+                Alternator.alternateRoute(routeName, elements);
             }
         });
     }

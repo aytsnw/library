@@ -10,27 +10,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class AddBookRoute extends Route {
-    HashMap<String, String> fields = new HashMap<>();
-
-    void fillFields(){
-        fields.put("title", "Title");
-        fields.put("author", "Author");
-        fields.put("isbn", "ISBN code");
-        fields.put("publisher", "Publisher");
-        fields.put("year", "Publication Year");
-        fields.put("category", "Category");
-    }
-
     public AddBookRoute(String name) {
         super(name);
     }
 
     @Override
-    protected void init() {fillFields(); elements.put("fields", fields);}
-
-    @Override
     public void process(HashMap<String, Object> screenParams) {
-        init();
         String message = null;
 
         try{
@@ -47,5 +32,5 @@ public class AddBookRoute extends Route {
     }
 
     @Override
-    public void process() {init();renderScreen("add", elements);}
+    public void process() {renderScreen("add_book", elements);}
 }

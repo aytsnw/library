@@ -13,11 +13,7 @@ public class RemoveBookRoute extends Route {
     }
 
     @Override
-    protected void init() {}
-
-    @Override
     public void process(HashMap<String, Object> screenParams) {
-        init();
         try{
             DbWriter.deleteFromBooks((String) screenParams.get("id"));
         } catch (SQLException ex){

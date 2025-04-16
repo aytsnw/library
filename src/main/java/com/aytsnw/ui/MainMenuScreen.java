@@ -13,8 +13,6 @@ import java.util.HashMap;
 
 public class MainMenuScreen extends Screen {
 
-    private ArrayList<String> options = null;
-
     public MainMenuScreen(String name, String title, RootWindow root){
         super(name, title, root);
     }
@@ -23,9 +21,9 @@ public class MainMenuScreen extends Screen {
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
         JButton addBtn = createButton("Add Book");
-        bindRoute("add", addBtn);
+        bindRoute("add_book", addBtn);
         JButton searchBtn = createButton("Search Book");
-        bindRoute("search", searchBtn);
+        bindRoute("search_book", searchBtn);
         JButton exitBtn = createButton("Exit");
         bindRoute("exit", exitBtn);
     }

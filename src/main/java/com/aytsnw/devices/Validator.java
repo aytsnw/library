@@ -18,47 +18,53 @@ public class Validator {
             validateCategory( (String) columns.get("category"));
     }
 
-    private static void validateTitle(String title) throws InvalidInputException{
+    public static void validateTitle(String title) throws InvalidInputException{
         if (title.isEmpty()){
             throw new InvalidInputException("Empty title!");
         }
     }
 
-    private static void validateAuthor(String author) throws InvalidInputException{
+    public static void validateAuthor(String author) throws InvalidInputException{
         if (author.isEmpty()){
             throw new InvalidInputException("Empty author!");
         }
     }
 
-    private static void validateIsbn(String isbn) throws InvalidInputException{
+    public static Long validateIsbn(String isbn) throws InvalidInputException{
         if (isbn.isEmpty()){
             throw new InvalidInputException("Empty ISBN!");
         } else if (isbn.length() != 13 ){
             throw new InvalidInputException("Invalid ISBN! (It must contain 13 digits)");
         }else {
             try {
-                Long isbnLong = Long.parseLong(isbn);
+                return Long.parseLong(isbn);
             } catch (NumberFormatException ex){
                 throw new InvalidInputException("Invalid ISBN!");
             }
         }
     }
 
-    private static void validatePublisher(String publisher) throws InvalidInputException{
+    public static void validatePublisher(String publisher) throws InvalidInputException{
         if (publisher.isEmpty()){
             throw new InvalidInputException("Empty publisher!");
         }
     }
 
-    private static void validateYear(String year) throws InvalidInputException{
+    public static Integer validateYear(String year) throws InvalidInputException{
         if (year.isEmpty()){
-            throw new InvalidInputException("Empty title!");
+            throw new InvalidInputException("Empty year!");
         } else if (year.length() != 4) {
             throw new InvalidInputException("Invalid year of publication!");
+        } else {
+            try {
+                return Integer.parseInt(year);
+            } catch (NumberFormatException ex){
+                throw new InvalidInputException("Invalid year of publication!");
+            }
         }
     }
 
-    private static void validateCategory(String cat) throws InvalidInputException{
+    public static void validateCategory(String cat) throws InvalidInputException{
         if (cat.isEmpty()){
             throw new InvalidInputException("Empty category!");
         }

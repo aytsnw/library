@@ -23,8 +23,6 @@ public abstract class Route {
         ScreenDisplayer.displayScreen(screenName);
     }
 
-    protected abstract void init();
-
     public abstract void process(HashMap<String, Object> screenParams);
 
     public abstract void process();

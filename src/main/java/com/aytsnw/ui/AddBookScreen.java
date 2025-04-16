@@ -8,11 +8,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.Map;
 
 public class AddBookScreen extends Screen {
-    HashMap<String, String> fields = null;
-    HashMap<String, JTextField> entries = new HashMap<>();
+    HashMap<String, JTextField> fields = new HashMap<>();
 
     public AddBookScreen(String name, String title, RootWindow root) {
         super(name, title, root);
@@ -21,44 +19,24 @@ public class AddBookScreen extends Screen {
     @Override
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
-        Object obj = routeParams.get("fields");
 
-        try{
-            fields = (HashMap<String, String>) obj;
-        } catch (ClassCastException ex){
-            System.out.println("'fields' elements must be of type: 'String'.");
-            System.out.println(ex.getMessage());
-            return;
-        }
-
-        JTextField title = createField("title", 20);
-        entries.put("title", title);
-
-        JTextField author = createField("author", 20);
-        entries.put("author", author);
-
-        JTextField isbn = createField("isbn", 20);
-        entries.put("isbn", isbn);
-
-        JTextField publisher = createField("publisher", 20);
-        entries.put("publisher", publisher);
-
-        JTextField year = createField("year", 20);
-        entries.put("year", year);
-
-        JTextField category = createField("category", 20);
-        entries.put("category", category);
+        fields.put("title", createField("Title", 20));
+        fields.put("author", createField("Author", 20));
+        fields.put("isbn", createField("ISBN", 20));
+        fields.put("publisher", createField("Publisher", 20));
+        fields.put("year", createField("Year", 20));
+        fields.put("category", createField("Category", 20));
 
         JButton submitBtn = new JButton();
-        this.parent.add(submitBtn);
+        addToParent(submitBtn);
         bindAction("add", submitBtn);
     }
 
-    private JTextField createField(String fieldKey, int width){
-        JLabel label = new JLabel(fields.get(fieldKey));
+    private JTextField createField(String fieldName, int width){
+        JLabel label = new JLabel(fieldName);
         JTextField entry = new JTextField(width);
-        this.parent.add(entry);
-        this.parent.add(label);
+        addToParent(entry);
+        addToParent(label);
         return entry;
     }
 
@@ -66,20 +44,17 @@ public class AddBookScreen extends Screen {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<String, Object> values = new HashMap<>();
-                values.put("title", entries.get("title").getText());
-                values.put("author", entries.get("author").getText());
-                values.put("isbn", entries.get("isbn").getText());
-                values.put("publisher", entries.get("publisher").getText());
-                values.put("year", entries.get("year").getText());
-                values.put("category", entries.get("category").getText());
-                Alternator.alternateRoute(routeName, values);
+                elements.put("title", fields.get("title").getText());
+                elements.put("author", fields.get("author").getText());
+                elements.put("isbn", fields.get("isbn").getText());
+                elements.put("publisher", fields.get("publisher").getText());
+                elements.put("year", fields.get("year").getText());
+                elements.put("category", fields.get("category").getText());
+                Alternator.alternateRoute(routeName, elements);
             }
         });
     }
 
     @Override
-    public void display() {
-
-    }
+    public void display() {}
 }

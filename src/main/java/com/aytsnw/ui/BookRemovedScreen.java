@@ -19,7 +19,5 @@ public class BookRemovedScreen extends Screen {
     }
 
     @Override
-    public void display() {
-
-    }
+    public void display() {}
 }

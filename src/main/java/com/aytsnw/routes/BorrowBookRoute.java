@@ -14,11 +14,7 @@ public class BorrowBookRoute extends Route {
     }
 
     @Override
-    protected void init() {}
-
-    @Override
     public void process(HashMap<String, Object> screenParams) {
-        init();
         String id = (String) screenParams.get("id");
         try{
             DbWriter.updateLoanStatus(id, "borrow");
@@ -35,5 +31,5 @@ public class BorrowBookRoute extends Route {
     }
 
     @Override
-    public void process() {init();}
+    public void process() {}
 }

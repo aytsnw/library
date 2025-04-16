@@ -18,7 +18,5 @@ public class BookBorrowedScreen extends Screen {
     }
 
     @Override
-    public void display() {
-
-    }
+    public void display() {}
 }

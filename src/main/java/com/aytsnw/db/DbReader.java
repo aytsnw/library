@@ -9,7 +9,6 @@ public class DbReader {
         ArrayList<HashMap<String, Object>> rows = new ArrayList<>();
 
         if (paramType.equals("title")){
-            System.out.println("Reading from books by title with: " + param);
             String query = String.format("SELECT * FROM books WHERE title LIKE '%%%s%%'", param);
             System.out.println("Executing: " + query);
             DbManager.rs = DbManager.stmt.executeQuery(query);

@@ -13,6 +13,8 @@ import java.util.HashMap;
 public abstract  class Screen {
     public static HashMap<String, Screen> screens = new HashMap<>();
 
+    public HashMap<String, Object> elements = new HashMap<>();
+
     private String name;
     protected RootWindow parent;
     private String title;

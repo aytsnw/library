@@ -15,7 +15,7 @@ public class BookAddedScreen extends Screen {
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
         JLabel messageLabel = new JLabel((String) routeParams.get("message"));
-        this.parent.add(messageLabel);
+        addToParent(messageLabel);
     }
 
     @Override

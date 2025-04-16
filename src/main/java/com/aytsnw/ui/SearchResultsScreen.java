@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SearchResultsScreen extends Screen {
-    HashMap<String, Object> elements = new HashMap<>();
 
     public SearchResultsScreen(String name, String title, RootWindow root) {
         super(name, title, root);
