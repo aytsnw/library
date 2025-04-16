@@ -33,14 +33,4 @@ public class RemoveBookRoute extends Route {
 
     @Override
     public void process() {}
-
-    @Override
-    protected void renderScreen(String screenName, HashMap<String, Object> innerParams) {
-        ScreenDisplayer.displayScreen(screenName, innerParams);
-    }
-
-    @Override
-    protected void renderScreen(String screeName) {
-
-    }
 }

@@ -1,5 +1,7 @@
 package com.aytsnw.core;
 
+import com.aytsnw.devices.ScreenDisplayer;
+
 import java.util.HashMap;
 
 public abstract class Route {
@@ -13,13 +15,18 @@ public abstract class Route {
         routes.put(name, this);
     }
 
+    public void renderScreen(String screenName, HashMap<String, Object> innerParams) {
+        ScreenDisplayer.displayScreen(screenName, innerParams);
+    }
+
+    public void renderScreen(String screenName) {
+        ScreenDisplayer.displayScreen(screenName);
+    }
+
     protected abstract void init();
 
     public abstract void process(HashMap<String, Object> screenParams);
 
     public abstract void process();
 
-    protected abstract void renderScreen(String screenName, HashMap<String, Object> innerParams);
-
-    protected abstract void renderScreen(String screeName);
 }

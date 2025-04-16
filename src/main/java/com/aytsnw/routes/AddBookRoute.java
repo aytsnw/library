@@ -3,9 +3,9 @@ package com.aytsnw.routes;
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbWriter;
 import com.aytsnw.devices.ScreenDisplayer;
+import com.aytsnw.devices.Validator;
 import com.aytsnw.exceptions.InvalidInputException;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -26,43 +26,26 @@ public class AddBookRoute extends Route {
     }
 
     @Override
-    protected void init() {
-        fillFields();
-        elements.put("fields", fields);
-    }
+    protected void init() {fillFields(); elements.put("fields", fields);}
 
     @Override
     public void process(HashMap<String, Object> screenParams) {
         init();
-
         String message = null;
 
         try{
             Validator.validate(screenParams);
             DbWriter.writeToBooks(screenParams);
             message = "Book added to database!";
-        } catch (InvalidInputException | SQLException ex){
+        } catch (InvalidInputException | SQLException | NullPointerException ex){
             message = ex.getMessage();
         }
 
         elements.put("message", message);
 
-        renderScreen("added", elements);
+        renderScreen("book_added", elements);
     }
 
     @Override
-    public void process() {
-        init();
-        renderScreen("add", elements);
-    }
-
-    @Override
-    public void renderScreen(String screenName, HashMap<String, Object> innerParams) {
-        ScreenDisplayer.displayScreen(screenName, innerParams);
-    }
-
-    @Override
-    public void renderScreen(String screenName) {
-        ScreenDisplayer.displayScreen(screenName);
-    }
+    public void process() {init();renderScreen("add", elements);}
 }

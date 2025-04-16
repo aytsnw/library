@@ -1,6 +1,7 @@
 package com.aytsnw.core;
 
 import com.aytsnw.devices.Alternator;
+import com.aytsnw.devices.ScreenDisplayer;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;

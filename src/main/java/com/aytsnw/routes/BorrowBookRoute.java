@@ -35,17 +35,5 @@ public class BorrowBookRoute extends Route {
     }
 
     @Override
-    public void process() {
-        init();
-    }
-
-    @Override
-    protected void renderScreen(String screenName, HashMap<String, Object> innerParams) {
-        ScreenDisplayer.displayScreen(screenName, innerParams);
-    }
-
-    @Override
-    protected void renderScreen(String screeName) {
-
-    }
+    public void process() {init();}
 }

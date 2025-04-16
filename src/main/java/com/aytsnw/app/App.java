@@ -33,12 +33,12 @@ public class App {
         IndexRoute indexRoute = new IndexRoute("index");
         MainMenuScreen mainScreen = new MainMenuScreen("main", "Main Menu", ScreenDisplayer.getParent());
 
-        AddBookRoute addRoute = new AddBookRoute("add");
-        AddBookScreen addScreen = new AddBookScreen("add", "Add Book", ScreenDisplayer.getParent());
-        BookAddedScreen addedScreen = new BookAddedScreen("added", "Result", ScreenDisplayer.getParent());
+        AddBookRoute addRoute = new AddBookRoute("add_book");
+        AddBookScreen addScreen = new AddBookScreen("add_book", "Add Book", ScreenDisplayer.getParent());
+        BookAddedScreen addedScreen = new BookAddedScreen("book_added", "Result", ScreenDisplayer.getParent());
 
-        SearchRoute searchRoute = new SearchRoute("search");
-        SearchScreen searchScreen = new SearchScreen("search", "Search Book", ScreenDisplayer.getParent());
+        SearchRoute searchRoute = new SearchRoute("search_book");
+        SearchScreen searchScreen = new SearchScreen("search_book", "Search Book", ScreenDisplayer.getParent());
         SearchResultsScreen searchResultsScreen = new SearchResultsScreen("search_results", "Results", ScreenDisplayer.getParent());
 
         RemoveBookRoute removeBookRoute = new RemoveBookRoute("remove_book");

@@ -38,14 +38,4 @@ public class IndexRoute extends Route {
         elements.put("options", options);
         renderScreen("main", elements);
     }
-
-    @Override
-    public void renderScreen(String screenName, HashMap<String, Object> innerParams) {
-        ScreenDisplayer.displayScreen("main", innerParams);
-    }
-
-    @Override
-    public void renderScreen(String screeName) {
-        ScreenDisplayer.displayScreen("main");
-    }
 }

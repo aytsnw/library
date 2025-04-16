@@ -16,9 +16,7 @@ public class SearchRoute extends Route {
     }
 
     @Override
-    protected void init() {
-
-    }
+    protected void init() {}
 
     @Override
     public void process(HashMap<String, Object> screenParams) {
@@ -29,7 +27,7 @@ public class SearchRoute extends Route {
             type = (String) screenParams.get("type");
             entry = (String) screenParams.get("entry");
         } catch (NullPointerException ex) {
-            System.out.println("Search option not found.");
+            System.out.println("Search parameter not found.");
             ex.printStackTrace();
             return;
         }
@@ -39,6 +37,7 @@ public class SearchRoute extends Route {
         try{
             rows = DbReader.readFromBooks(type, entry);
         } catch (SQLException ex){
+            System.out.println("SQL Error: Couldn't Select from db.");
             System.out.println(ex.getMessage());
         }
 
@@ -48,18 +47,5 @@ public class SearchRoute extends Route {
     }
 
     @Override
-    public void process() {
-        init();
-        renderScreen("search");
-    }
-
-    @Override
-    protected void renderScreen(String screenName, HashMap<String, Object> innerParams) {
-        ScreenDisplayer.displayScreen(screenName, innerParams);
-    }
-
-    @Override
-    protected void renderScreen(String screenName) {
-        ScreenDisplayer.displayScreen(screenName);
-    }
+    public void process() {init();renderScreen("search_book");}
 }
