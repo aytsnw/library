@@ -74,6 +74,14 @@ public abstract  class Screen {
         this.parent.add(component);
     }
 
+    public JTextField createField(String fieldName, int width){
+        JLabel label = new JLabel(fieldName);
+        JTextField entry = new JTextField(width);
+        addToParent(entry);
+        addToParent(label);
+        return entry;
+    }
+
     public abstract void display(HashMap<String, Object> routeParams);
     public abstract void display();
 }

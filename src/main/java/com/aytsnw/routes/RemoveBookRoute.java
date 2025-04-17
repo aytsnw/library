@@ -17,8 +17,8 @@ public class RemoveBookRoute extends Route {
         } catch (SQLException ex){
             System.out.println("SQL Error: couldn't delete from 'books' table");
             System.out.println(ex.getMessage());
-            elements.put("message", ex.getMessage());
-            renderScreen("remove_book", elements);
+            elements.put("message", "Error deleting book.");
+            renderScreen("error", elements);
             return;
         }
         elements.put("message", "Book removed successfully");

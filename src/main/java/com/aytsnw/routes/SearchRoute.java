@@ -27,7 +27,7 @@ public class SearchRoute extends Route {
         } catch (InvalidInputException ex){
             message = "Empty parameter!";
             elements.put("message", message);
-            renderScreen("search_results", elements);
+            renderScreen("error", elements);
             return;
         }
 
@@ -38,6 +38,9 @@ public class SearchRoute extends Route {
         } catch (SQLException ex){
             message = "SQL Error: Couldn't Select from db.";
             System.out.println(ex.getMessage());
+            elements.put("message", message);
+            renderScreen("error", elements);
+            return;
         }
 
         elements.put("book_rows", bookRows);

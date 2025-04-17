@@ -32,14 +32,6 @@ public class AddBookScreen extends Screen {
         bindAction("add_book", submitBtn);
     }
 
-    private JTextField createField(String fieldName, int width){
-        JLabel label = new JLabel(fieldName);
-        JTextField entry = new JTextField(width);
-        addToParent(entry);
-        addToParent(label);
-        return entry;
-    }
-
      private void bindAction(String routeName, JButton btn){
         btn.addActionListener(new ActionListener() {
             @Override

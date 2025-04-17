@@ -33,6 +33,9 @@ public class App {
         IndexRoute indexRoute = new IndexRoute("index");
         MainMenuScreen mainScreen = new MainMenuScreen("main", "Main Menu", ScreenDisplayer.getParent());
 
+        LoginRoute loginRoute = new LoginRoute("login");
+        LoginScreen loginScreen = new LoginScreen("login", "Login", ScreenDisplayer.getParent());
+
         AddBookRoute addRoute = new AddBookRoute("add_book");
         AddBookScreen addScreen = new AddBookScreen("add_book", "Add Book", ScreenDisplayer.getParent());
         BookAddedScreen addedScreen = new BookAddedScreen("book_added", "Result", ScreenDisplayer.getParent());
@@ -47,7 +50,9 @@ public class App {
         BorrowBookRoute borrowBookRoute = new BorrowBookRoute("borrow_book");
         BookBorrowedScreen bookBorrowedScreen = new BookBorrowedScreen("book_borrowed", "Book Borrowing", ScreenDisplayer.getParent());
 
-        Alternator.alternateRoute("index");
+        ErrorScreen errorScreen = new ErrorScreen("error", "Error", ScreenDisplayer.getParent());
+
+        Alternator.alternateRoute("login");
     }
     public static void main(String[] args){
         initApp();
