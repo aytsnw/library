@@ -48,7 +48,6 @@ public class App {
         BookBorrowedScreen bookBorrowedScreen = new BookBorrowedScreen("book_borrowed", "Book Borrowing", ScreenDisplayer.getParent());
 
         Alternator.alternateRoute("index");
-
     }
     public static void main(String[] args){
         initApp();

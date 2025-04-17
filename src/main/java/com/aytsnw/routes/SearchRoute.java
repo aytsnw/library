@@ -2,42 +2,46 @@ package com.aytsnw.routes;
 
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbReader;
-import com.aytsnw.devices.ScreenDisplayer;
+import com.aytsnw.devices.Validator;
+import com.aytsnw.exceptions.InvalidInputException;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SearchRoute extends Route {
 
-    public SearchRoute(String name) {
-        super(name);
-    }
+    public SearchRoute(String name) {super(name);}
 
     @Override
     public void process(HashMap<String, Object> screenParams) {
         String type = null;
-        String entry = null;
+        String query = null;
+        String message = "";
+
         try {
             type = (String) screenParams.get("type");
-            entry = (String) screenParams.get("entry");
-        } catch (NullPointerException ex) {
-            System.out.println("Search parameter not found.");
-            ex.printStackTrace();
+            query = (String) screenParams.get("entry");
+            if (type.equals("title")){Validator.validateTitle(query);}
+            else if (type.equals("isbn")){Validator.validateIsbn(query);}
+        } catch (InvalidInputException ex){
+            message = "Empty parameter!";
+            elements.put("message", message);
+            renderScreen("search_results", elements);
             return;
         }
 
-        ArrayList<HashMap<String, Object>> rows = null;
+        ArrayList<HashMap<String, Object>> bookRows = null;
 
         try{
-            rows = DbReader.readFromBooks(type, entry);
+            bookRows = DbReader.readFromBooks(type, query);
         } catch (SQLException ex){
-            System.out.println("SQL Error: Couldn't Select from db.");
+            message = "SQL Error: Couldn't Select from db.";
             System.out.println(ex.getMessage());
         }
 
-        elements.put("rows", rows);
+        elements.put("book_rows", bookRows);
+        elements.put("message", message);
 
         renderScreen("search_results", elements);
     }

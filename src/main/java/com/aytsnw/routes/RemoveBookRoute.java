@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class RemoveBookRoute extends Route {
-    public RemoveBookRoute(String name) {
-        super(name);
-    }
+    public RemoveBookRoute(String name) {super(name);}
 
     @Override
     public void process(HashMap<String, Object> screenParams) {

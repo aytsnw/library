@@ -1,13 +1,15 @@
 package com.aytsnw.db;
 
+import com.aytsnw.model.Book;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 
 public class DbWriter {
-    public static void writeToBooks(HashMap<String, Object> columns) throws SQLException {
-        DbManager.stmt.executeUpdate(String.format("INSERT INTO books (title, isbn, author, publisher, year, category, loan_status)" +
-                " VALUES('%s', %d, '%s', '%s', %d, '%s', '%s')", columns.get("title"), columns.get("isbn"), columns.get("author"),
-                columns.get("publisher"), columns.get("year"), columns.get("category"), "available"));
+    public static void writeToBooks(Book book) throws SQLException {
+        DbManager.stmt.executeUpdate(String.format("INSERT INTO books (title, author, isbn, publisher, year, category, loan_status)" +
+                " VALUES('%s', '%s', %d, '%s', %d, '%s', '%s')", book.getTitle(), book.getAuthor(), book.getIsbn(),
+                book.getPublisher(), book.getYear(), book.getCategory(), "available"));
     }
 
     public static void writeToTransactions(HashMap<String, Object> columns) throws SQLException{

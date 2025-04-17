@@ -4,6 +4,7 @@ import com.aytsnw.core.Screen;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
+import java.security.KeyException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,7 +17,15 @@ public class SearchResultsScreen extends Screen {
     @Override
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
-        for (HashMap<String, Object> row : (ArrayList<HashMap<String, Object>>) routeParams.get("rows")){
+
+        ArrayList<HashMap<String, Object>> bookRows = (ArrayList<HashMap<String, Object>>) routeParams.get("book_rows");
+
+        if (bookRows == null){
+            System.out.println("'book_rows' not passed as argument.");
+            return;
+        }
+
+        for (HashMap<String, Object> row : bookRows){
             createBookFrame(row);
             String id = (String) row.get("id");
             createRemoveBookButton(id);

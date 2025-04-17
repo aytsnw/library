@@ -14,12 +14,8 @@ public class IndexRoute extends Route {
     }
 
     @Override
-    public void process(HashMap<String, Object> screenParams) {
-        renderScreen("main", elements);
-    }
+    public void process(HashMap<String, Object> screenParams) {renderScreen("main", elements);}
 
     @Override
-    public void process() {
-        renderScreen("main", elements);
-    }
+    public void process() {renderScreen("main", elements);}
 }

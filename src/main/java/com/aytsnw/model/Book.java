@@ -10,6 +10,7 @@ public class Book {
     private String publisher;
     private Integer year;
     private String category;
+    private String loan_status;
 
 
     public String getTitle() {return title;}
@@ -19,43 +20,31 @@ public class Book {
     public Integer getYear() {return year;}
     public String getCategory() {return category;}
 
-    public void setTitle(String title) {
-        try{
-            Validator.validateTitle(title);
-            this.title = title;
-        } catch (InvalidInputException ex){System.out.println(ex.getMessage());}
+    public void setTitle(String title) throws InvalidInputException{
+        Validator.validateTitle(title);
+        this.title = title;
     }
 
-    public void setAuthor(String author) {
-        try{
-            Validator.validateAuthor(author);
-            this.author = author;
-        } catch (InvalidInputException ex){System.out.println(ex.getMessage());}
+    public void setAuthor(String author) throws InvalidInputException{
+        Validator.validateAuthor(author);
+        this.author = author;
     }
 
-    public void setIsbn(String isbn) {
-        try{
-            this.isbn = Validator.validateIsbn(isbn);
-        } catch (InvalidInputException ex){System.out.println(ex.getMessage());}
+    public void setIsbn(String isbn) throws InvalidInputException{
+        this.isbn = Validator.validateIsbn(isbn);
     }
 
-    public void setPublisher(String publisher) {
-        try{
-            Validator.validatePublisher(publisher);
-            this.publisher = publisher;
-        } catch (InvalidInputException ex){System.out.println(ex.getMessage());}
+    public void setPublisher(String publisher) throws InvalidInputException{
+        Validator.validatePublisher(publisher);
+        this.publisher = publisher;
     }
 
-    public void setYear(String year) {
-        try{
-            this.year = Validator.validateYear(year);
-        } catch (InvalidInputException ex){System.out.println(ex.getMessage());}
+    public void setYear(String year) throws InvalidInputException{
+        this.year = Validator.validateYear(year);
     }
 
-    public void setCategory(String category) {
-        try{
-            Validator.validateCategory(category);
-            this.category = category;
-        } catch (InvalidInputException ex){System.out.println(ex.getMessage());}
+    public void setCategory(String category) throws InvalidInputException{
+        Validator.validateCategory(category);
+        this.category = category;
     }
 }

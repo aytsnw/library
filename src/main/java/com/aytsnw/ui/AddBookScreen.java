@@ -29,7 +29,7 @@ public class AddBookScreen extends Screen {
 
         JButton submitBtn = new JButton();
         addToParent(submitBtn);
-        bindAction("add", submitBtn);
+        bindAction("add_book", submitBtn);
     }
 
     private JTextField createField(String fieldName, int width){

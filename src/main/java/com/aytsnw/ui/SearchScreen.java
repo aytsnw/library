@@ -26,12 +26,12 @@ public class SearchScreen extends Screen {
         JTextField titleEntry = new JTextField(20);
         addToParent(titleEntry);
         JButton searchTitleBtn = createButton("Search by Title");
-        bindFormSubmitting("title", "search", searchTitleBtn, titleEntry);
+        bindFormSubmitting("title", "search_book", searchTitleBtn, titleEntry);
 
         JTextField isbnEntry = new JTextField(20);
         addToParent(isbnEntry);
         JButton searchIsbn = createButton("Search by ISBN");
-        bindFormSubmitting("isbn", "search", searchIsbn, isbnEntry);
+        bindFormSubmitting("isbn", "search_book", searchIsbn, isbnEntry);
     }
 
     void bindFormSubmitting(String type, String routeName, JButton btn, JTextField entry){

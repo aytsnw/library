@@ -56,13 +56,4 @@ public class DbManager {
             throw new SQLException();
         }
     }
-
-    public static ResultSet select(String query){
-        try {
-            rs = stmt.executeQuery(query);
-        } catch (SQLException ex){
-            System.out.println(ex.getMessage());
-        }
-        return rs;
-    }
 }

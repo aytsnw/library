@@ -28,7 +28,6 @@ public class MainMenuScreen extends Screen {
         bindRoute("exit", exitBtn);
     }
 
-
     @Override
     public void display() {drawHeader();}
 }
