@@ -1,0 +1,56 @@
+package com.aytsnw.ui.logreg;
+
+import com.aytsnw.core.Screen;
+import com.aytsnw.devices.Alternator;
+import com.aytsnw.windows.RootWindow;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+
+public class LoginScreen extends Screen {
+    HashMap<String, JTextField> fields = new HashMap<>();
+
+    public LoginScreen(String name, String title, RootWindow root) {
+        super(name, title, root);
+    }
+
+    @Override
+    public void display(HashMap<String, Object> routeParams) {}
+
+    @Override
+    public void display() {
+        drawLoginHeader();
+        drawLoginForm();
+    }
+
+    @Override
+    public void display(String message) {}
+
+    private void drawLoginHeader(){
+        JButton registerBtn = createButton("Register");
+        bindRoute("register", registerBtn);
+        createLabel(this.title);
+    }
+
+    private void drawLoginForm(){
+        JTextField username = createField("Username", 20);
+        fields.put("username", username);
+        JTextField password = createField("Password", 20);
+        fields.put("password", password);
+        JButton submitBtn = createButton("Login");
+        bindAction("login", submitBtn);
+    }
+
+    private void bindAction(String routeName, JButton btn){
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                elements.put("username", fields.get("username").getText());
+                elements.put("password", fields.get("password").getText());
+                Alternator.alternateRoute(routeName, elements);
+            }
+        });
+    }
+}

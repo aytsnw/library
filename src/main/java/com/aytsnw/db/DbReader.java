@@ -34,4 +34,19 @@ public class DbReader {
 
         return rows;
     }
+
+    public static boolean checkUserExistence(String username) throws SQLException{
+        String query = "SELECT username FROM users WHERE username = '%s'".formatted(username);
+        System.out.println(query);
+        DbManager.rs = DbManager.stmt.executeQuery(query);
+        return DbManager.rs.next();
+    }
+
+    public static String checkPasswordHash(String username) throws SQLException{
+        String query = "SELECT password_hash FROM users WHERE username = '%s'".formatted(username);
+        System.out.println(query);
+        DbManager.rs = DbManager.stmt.executeQuery(query);
+        DbManager.rs.next();
+        return DbManager.rs.getString("password_hash");
+    }
 }

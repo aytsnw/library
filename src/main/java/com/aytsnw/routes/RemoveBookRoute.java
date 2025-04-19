@@ -2,7 +2,6 @@ package com.aytsnw.routes;
 
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbWriter;
-import com.aytsnw.devices.ScreenDisplayer;
 
 import java.sql.SQLException;
 import java.util.HashMap;

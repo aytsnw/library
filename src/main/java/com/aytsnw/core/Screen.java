@@ -13,39 +13,44 @@ import java.util.HashMap;
 public abstract  class Screen {
     public static HashMap<String, Screen> screens = new HashMap<>();
 
-    public HashMap<String, Object> elements = new HashMap<>();
+    protected HashMap<String, Object> elements = new HashMap<>();
 
     private String name;
     protected RootWindow parent;
-    private String title;
+    protected String title;
 
-    public Screen(String name, String title, RootWindow root){
+    protected Screen(String name, String title, RootWindow root){
         this.name = name;
         this.title = title;
         this.parent = root;
         screens.put(name, this);
     }
-
-    public void drawHeader(){
-        JLabel header = new JLabel(this.title);
-        drawNavBar();
-        parent.add(header);
-    }
-
-    private void drawNavBar(){
+    protected void drawNavBar(){
         JButton mainBtn = createButton("Main Menu");
         bindRoute("index", mainBtn);
         JButton returnBtn = createButton("Return");
         bindRoute("prev", returnBtn);
     }
 
-    public JButton createButton(String text){
+    protected JButton createButton(String text){
         JButton btn = new JButton(text);
         this.parent.add(btn);
         return btn;
     }
 
-    public void bindRoute(String routeName, JButton btn){
+    protected void drawHeader(){
+        JLabel header = new JLabel(this.title);
+        drawNavBar();
+        parent.add(header);
+    }
+
+    protected JLabel createLabel(String labelText){
+        JLabel label = new JLabel(labelText);
+        addToParent(label);
+        return label;
+    }
+
+    protected void bindRoute(String routeName, JButton btn){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,7 +65,7 @@ public abstract  class Screen {
         });
     }
 
-    public void bindRoute(String routeName, JButton btn, HashMap<String, Object> params){
+    protected void bindRoute(String routeName, JButton btn, HashMap<String, Object> params){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,11 +75,11 @@ public abstract  class Screen {
         });
     }
 
-    public void addToParent(Component component){
+    protected void addToParent(Component component){
         this.parent.add(component);
     }
 
-    public JTextField createField(String fieldName, int width){
+    protected JTextField createField(String fieldName, int width){
         JLabel label = new JLabel(fieldName);
         JTextField entry = new JTextField(width);
         addToParent(entry);
@@ -84,4 +89,5 @@ public abstract  class Screen {
 
     public abstract void display(HashMap<String, Object> routeParams);
     public abstract void display();
+    public abstract void display(String message);
 }

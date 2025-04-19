@@ -30,4 +30,7 @@ public class MainMenuScreen extends Screen {
 
     @Override
     public void display() {drawHeader();}
+
+    @Override
+    public void display(String message) {}
 }

@@ -1,4 +1,4 @@
-package com.aytsnw.ui;
+package com.aytsnw.ui.bookcrud;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.devices.Alternator;
@@ -49,4 +49,7 @@ public class AddBookScreen extends Screen {
 
     @Override
     public void display() {}
+
+    @Override
+    public void display(String message) {}
 }

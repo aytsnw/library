@@ -1,4 +1,4 @@
-package com.aytsnw.ui;
+package com.aytsnw.ui.search;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.devices.Alternator;
@@ -32,6 +32,11 @@ public class SearchScreen extends Screen {
         addToParent(isbnEntry);
         JButton searchIsbn = createButton("Search by ISBN");
         bindFormSubmitting("isbn", "search_book", searchIsbn, isbnEntry);
+    }
+
+    @Override
+    public void display(String message) {
+
     }
 
     void bindFormSubmitting(String type, String routeName, JButton btn, JTextField entry){

@@ -1,4 +1,4 @@
-package com.aytsnw.ui;
+package com.aytsnw.ui.bookcrud;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.windows.RootWindow;
@@ -20,4 +20,7 @@ public class BookRemovedScreen extends Screen {
 
     @Override
     public void display() {}
+
+    @Override
+    public void display(String message) {}
 }

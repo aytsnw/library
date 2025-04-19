@@ -1,6 +1,7 @@
 package com.aytsnw.db;
 
 import com.aytsnw.model.Book;
+import com.aytsnw.model.User;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -17,8 +18,8 @@ public class DbWriter {
                         " VALUES('%s', %d, %d)", columns.get("type"), columns.get("user_id"), columns.get("book_id")));
     }
 
-    public static void writeToUsers(HashMap<String, Object> columns) throws SQLException{
-        DbManager.stmt.executeUpdate(String.format("INSERT INTO users (username) VALUES('%s')", columns.get("username")));
+    public static void writeToUsers(User user) throws SQLException{
+        DbManager.stmt.executeUpdate(String.format("INSERT INTO users (username, password_hash) VALUES('%s', '%s')", user.getUsername(), user.getPasswordHash()));
     }
 
     public static void deleteFromBooks(String id) throws SQLException{

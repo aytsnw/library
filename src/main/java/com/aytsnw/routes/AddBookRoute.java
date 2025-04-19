@@ -15,26 +15,16 @@ public class AddBookRoute extends Route {
 
     @Override
     public void process(HashMap<String, Object> screenParams) {
-        String message = null;
-
         try{
             DbWriter.writeToBooks(parseBook(screenParams));
-            message = "Book added to database!";
+            elements.put("message", "Book added to database!");
+            renderScreen("book_added", elements);
         } catch (InvalidInputException ex){
-            message = "Couldn't add book to database: " + ex.getMessage();
-            elements.put("message", message);
-            renderScreen("error", elements);
-            return;
+            renderErrorScreen("Couldn't add book to database: " + ex.getMessage());
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
-            elements.put("message", message);
-            renderScreen("error", elements);
-            return;
+            renderErrorScreen("Couldn't add book to database: " + ex.getMessage());
         }
-
-        elements.put("message", message);
-
-        renderScreen("book_added", elements);
     }
 
     private Book parseBook(HashMap<String, Object> screenParams) throws InvalidInputException{

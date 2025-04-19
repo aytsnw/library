@@ -10,17 +10,21 @@ public abstract class Route {
     String name;
     protected HashMap<String, Object> elements = new HashMap<>();
 
-    public Route (String name){
+    protected Route (String name){
         this.name = name;
         routes.put(name, this);
     }
 
-    public void renderScreen(String screenName, HashMap<String, Object> innerParams) {
+    protected void renderScreen(String screenName, HashMap<String, Object> innerParams) {
         ScreenDisplayer.displayScreen(screenName, innerParams);
     }
 
-    public void renderScreen(String screenName) {
+    protected void renderScreen(String screenName) {
         ScreenDisplayer.displayScreen(screenName);
+    }
+
+    protected void renderErrorScreen(String message){
+        ScreenDisplayer.displayErrorScreen(message);
     }
 
     public abstract void process(HashMap<String, Object> screenParams);

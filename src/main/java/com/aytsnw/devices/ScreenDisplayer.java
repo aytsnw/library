@@ -42,5 +42,16 @@ public class ScreenDisplayer {
         parent.revalidate();
         parent.repaint();
     }
+
+    public static void displayErrorScreen(String message){
+        parent.getContentPane().removeAll();
+        try {
+            Screen.screens.get("error").display(message);
+        } catch (NullPointerException ex){
+            System.out.println("Screen '" + "error" + "' not initialized.");
+        }
+        parent.revalidate();
+        parent.repaint();
+    }
 }
 

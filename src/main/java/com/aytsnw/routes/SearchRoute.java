@@ -2,7 +2,7 @@ package com.aytsnw.routes;
 
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbReader;
-import com.aytsnw.devices.Validator;
+import com.aytsnw.devices.BookValidator;
 import com.aytsnw.exceptions.InvalidInputException;
 
 import java.sql.SQLException;
@@ -22,8 +22,10 @@ public class SearchRoute extends Route {
         try {
             type = (String) screenParams.get("type");
             query = (String) screenParams.get("entry");
-            if (type.equals("title")){Validator.validateTitle(query);}
-            else if (type.equals("isbn")){Validator.validateIsbn(query);}
+            if (type.equals("title")){
+                BookValidator.validateTitle(query);}
+            else if (type.equals("isbn")){
+                BookValidator.validateIsbn(query);}
         } catch (InvalidInputException ex){
             message = "Empty parameter!";
             elements.put("message", message);

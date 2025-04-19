@@ -1,6 +1,6 @@
 package com.aytsnw.model;
 
-import com.aytsnw.devices.Validator;
+import com.aytsnw.devices.BookValidator;
 import com.aytsnw.exceptions.InvalidInputException;
 
 public class Book {
@@ -21,30 +21,30 @@ public class Book {
     public String getCategory() {return category;}
 
     public void setTitle(String title) throws InvalidInputException{
-        Validator.validateTitle(title);
+        BookValidator.validateTitle(title);
         this.title = title;
     }
 
     public void setAuthor(String author) throws InvalidInputException{
-        Validator.validateAuthor(author);
+        BookValidator.validateAuthor(author);
         this.author = author;
     }
 
     public void setIsbn(String isbn) throws InvalidInputException{
-        this.isbn = Validator.validateIsbn(isbn);
+        this.isbn = BookValidator.validateIsbn(isbn);
     }
 
     public void setPublisher(String publisher) throws InvalidInputException{
-        Validator.validatePublisher(publisher);
+        BookValidator.validatePublisher(publisher);
         this.publisher = publisher;
     }
 
     public void setYear(String year) throws InvalidInputException{
-        this.year = Validator.validateYear(year);
+        this.year = BookValidator.validateYear(year);
     }
 
     public void setCategory(String category) throws InvalidInputException{
-        Validator.validateCategory(category);
+        BookValidator.validateCategory(category);
         this.category = category;
     }
 }

@@ -4,7 +4,7 @@ import com.aytsnw.exceptions.InvalidInputException;
 
 import java.util.HashMap;
 
-public class Validator {
+public class BookValidator {
     public static void validate(HashMap<String, Object> columns) throws InvalidInputException, NullPointerException{
             validateTitle( (String) columns.get("title"));
             validateAuthor( (String) columns.get("author"));

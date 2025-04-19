@@ -12,9 +12,12 @@ public class ErrorScreen extends Screen {
     }
 
     @Override
-    public void display(HashMap<String, Object> routeParams) {
+    public void display(HashMap<String, Object> routeParams) {}
+
+    @Override
+    public void display(String message) {
         drawHeader();
-        addToParent(new JLabel((String) routeParams.get("message")));
+        createLabel(message);
     }
 
     @Override

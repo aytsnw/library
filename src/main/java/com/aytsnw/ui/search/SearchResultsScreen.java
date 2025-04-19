@@ -1,10 +1,9 @@
-package com.aytsnw.ui;
+package com.aytsnw.ui.search;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
-import java.security.KeyException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -58,4 +57,7 @@ public class SearchResultsScreen extends Screen {
 
     @Override
     public void display() {}
+
+    @Override
+    public void display(String message) {}
 }
