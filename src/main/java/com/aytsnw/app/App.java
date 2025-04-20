@@ -9,7 +9,6 @@ import com.aytsnw.devices.Alternator;
 import java.sql.SQLException;
 
 
-
 public class App {
     static void initApp(){
         System.out.println("Initializing application....");

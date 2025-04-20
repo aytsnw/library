@@ -27,9 +27,7 @@ public class SearchRoute extends Route {
             else if (type.equals("isbn")){
                 BookValidator.validateIsbn(query);}
         } catch (InvalidInputException ex){
-            message = "Empty parameter!";
-            elements.put("message", message);
-            renderScreen("error", elements);
+            renderErrorScreen("Empty parameter!");
             return;
         }
 
