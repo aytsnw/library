@@ -12,8 +12,8 @@ import java.util.HashMap;
 
 public class SearchScreen extends Screen {
 
-    public SearchScreen(String name, String title, RootWindow root) {
-        super(name, title, root);
+    public SearchScreen(String name, String title, JPanel rootFrame) {
+        super(name, title, rootFrame);
     }
 
     @Override

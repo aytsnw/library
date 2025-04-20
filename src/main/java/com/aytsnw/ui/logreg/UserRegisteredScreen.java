@@ -3,11 +3,12 @@ package com.aytsnw.ui.logreg;
 import com.aytsnw.core.Screen;
 import com.aytsnw.windows.RootWindow;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 public class UserRegisteredScreen extends Screen {
-    public UserRegisteredScreen(String name, String title, RootWindow root) {
-        super(name, title, root);
+    public UserRegisteredScreen(String name, String title, JPanel rootFrame) {
+        super(name, title, rootFrame);
     }
 
     @Override

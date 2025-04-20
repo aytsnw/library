@@ -12,7 +12,8 @@ import java.sql.SQLException;
 public class App {
     static void initApp(){
         System.out.println("Initializing application....");
-        try{DbManager.init();
+        try{
+            DbManager.init();
         } catch (SQLException e) {
             System.out.println("Terminating process due to SQL Error...");
             System.exit(1);
@@ -24,8 +25,8 @@ public class App {
 
         ScreenDisplayer.initRootWindow();
 
-        Helper.initRoutes();
-        Helper.initScreens();
+        Initializer.initRoutes();
+        Initializer.initScreens();
 
         Alternator.alternateRoute("login");
     }

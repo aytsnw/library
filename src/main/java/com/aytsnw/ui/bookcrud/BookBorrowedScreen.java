@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.util.HashMap;
 
 public class BookBorrowedScreen extends Screen {
-    public BookBorrowedScreen(String name, String title, RootWindow root) {
-        super(name, title, root);
+    public BookBorrowedScreen(String name, String title, JPanel rootFrame) {
+        super(name, title, rootFrame);
     }
 
     @Override

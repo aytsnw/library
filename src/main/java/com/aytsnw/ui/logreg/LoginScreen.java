@@ -5,6 +5,8 @@ import com.aytsnw.devices.Alternator;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -12,8 +14,8 @@ import java.util.HashMap;
 public class LoginScreen extends Screen {
     HashMap<String, JTextField> fields = new HashMap<>();
 
-    public LoginScreen(String name, String title, RootWindow root) {
-        super(name, title, root);
+    public LoginScreen(String name, String title, JPanel rootFrame) {
+        super(name, title, rootFrame);
     }
 
     @Override
@@ -31,7 +33,9 @@ public class LoginScreen extends Screen {
     private void drawLoginHeader(){
         JButton registerBtn = createButton("Register");
         bindRoute("register", registerBtn);
-        createLabel(this.title);
+        JLabel l = createLabel(this.title);
+        l.setFont(new Font("Arial", Font.BOLD, 20));
+        l.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     private void drawLoginForm(){

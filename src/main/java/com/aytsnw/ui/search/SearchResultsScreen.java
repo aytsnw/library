@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 public class SearchResultsScreen extends Screen {
 
-    public SearchResultsScreen(String name, String title, RootWindow root) {
-        super(name, title, root);
+    public SearchResultsScreen(String name, String title, JPanel rootFrame) {
+        super(name, title, rootFrame);
     }
 
     @Override

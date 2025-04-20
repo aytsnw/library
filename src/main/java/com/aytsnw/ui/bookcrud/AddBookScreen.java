@@ -12,8 +12,8 @@ import java.util.HashMap;
 public class AddBookScreen extends Screen {
     HashMap<String, JTextField> fields = new HashMap<>();
 
-    public AddBookScreen(String name, String title, RootWindow root) {
-        super(name, title, root);
+    public AddBookScreen(String name, String title, JPanel rootFrame) {
+        super(name, title, rootFrame);
     }
 
     @Override

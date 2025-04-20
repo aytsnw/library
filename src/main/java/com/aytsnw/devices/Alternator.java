@@ -11,34 +11,31 @@ public class Alternator {
 
     public static void alternateRoute(String routeName, HashMap<String, Object> params){
         System.out.println("Calling route: '" + routeName + "'...");
-        if (currentRoute == null){
-            prevRoute = routeName;
-        } else {
-            prevRoute = currentRoute;
-        }
-        currentRoute = routeName;
-        try{
-            Route.routes.get(routeName).process(params);
-        } catch (NullPointerException ex) {
+        if (Route.routes.get(routeName) == null) {
             System.out.println("Route '" + routeName + "' not initialized");
-            System.out.println(ex.getMessage());
+            return;
         }
+
+        if (currentRoute == null) prevRoute = routeName;
+        else prevRoute = currentRoute;
+
+        currentRoute = routeName;
+        Route.routes.get(routeName).process(params);
     }
 
     public static void alternateRoute(String routeName){
         System.out.println("Calling route: '" + routeName + "'...");
-        if (currentRoute == null){
-            prevRoute = routeName;
-        } else{
-            prevRoute = currentRoute;
-        }
-        currentRoute = routeName;
-        try{
-            Route.routes.get(routeName).process();
-        } catch (NullPointerException ex) {
+
+        if (Route.routes.get(routeName) == null) {
             System.out.println("Route '" + routeName + "' not initialized");
-            System.out.println(ex.getMessage());
+            return;
         }
+
+        if (currentRoute == null) prevRoute = routeName;
+        else prevRoute = currentRoute;
+
+        currentRoute = routeName;
+        Route.routes.get(routeName).process();
     }
 
     public static void alternatePrev(){

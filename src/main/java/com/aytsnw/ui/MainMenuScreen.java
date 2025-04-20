@@ -13,19 +13,16 @@ import java.util.HashMap;
 
 public class MainMenuScreen extends Screen {
 
-    public MainMenuScreen(String name, String title, RootWindow root){
-        super(name, title, root);
+    public MainMenuScreen(String name, String title, JPanel rootFrame){
+        super(name, title, rootFrame);
     }
 
     @Override
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
-        JButton addBtn = createButton("Add Book");
-        bindRoute("add_book", addBtn);
-        JButton searchBtn = createButton("Search Book");
-        bindRoute("search_book", searchBtn);
-        JButton exitBtn = createButton("Exit");
-        bindRoute("exit", exitBtn);
+        bindRoute("add_book", createButton("Add Book"));
+        bindRoute("search_book", createButton("Search Book"));
+        bindRoute("exit", createButton("Exit"));
     }
 
     @Override

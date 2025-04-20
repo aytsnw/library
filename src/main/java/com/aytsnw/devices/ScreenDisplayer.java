@@ -3,55 +3,62 @@ package com.aytsnw.devices;
 import com.aytsnw.windows.RootWindow;
 import com.aytsnw.core.Screen;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
 public class ScreenDisplayer {
-    private static RootWindow parent = new RootWindow("Library");
+    private static RootWindow rootWindow = new RootWindow("Library");
+    private static JPanel rootFrame = new JPanel();
 
-    public static RootWindow getParent(){
-        return parent;
+    public static JPanel getRootFrame(){
+        return rootFrame;
     }
 
     public static void initRootWindow(){
-        parent.setSize(400, 400);
-        parent.setDefaultCloseOperation(RootWindow.EXIT_ON_CLOSE);
-        parent.setLayout(new FlowLayout());
-        parent.setVisible(true);
-        parent.setInitState(true);
+        rootWindow.setSize(500, 700);
+        rootWindow.setDefaultCloseOperation(RootWindow.EXIT_ON_CLOSE);
+        rootWindow.setLayout(new FlowLayout());
+        rootWindow.setVisible(true);
+        rootWindow.setInitState(true);
+
+        GridLayout grd = new GridLayout(0,1);
+        grd.setVgap(6);
+        rootFrame.setLayout(grd);
+        rootWindow.add(rootFrame);
     }
 
     public static void displayScreen(String screenName, HashMap<String, Object> params){
-        parent.getContentPane().removeAll();
+        rootFrame.removeAll();
         try{
             Screen.screens.get(screenName).display(params);
         } catch (NullPointerException ex){
             System.out.println("Screen '" + screenName + "' not initialized.");
         }
-        parent.revalidate();
-        parent.repaint();
+        rootFrame.revalidate();
+        rootFrame.repaint();
     }
 
     public static void displayScreen(String screenName){
-        parent.getContentPane().removeAll();
+        rootFrame.removeAll();
         try {
             Screen.screens.get(screenName).display();
         } catch (NullPointerException ex){
             System.out.println("Screen '" + screenName + "' not initialized.");
         }
-        parent.revalidate();
-        parent.repaint();
+        rootFrame.revalidate();
+        rootFrame.repaint();
     }
 
     public static void displayErrorScreen(String message){
-        parent.getContentPane().removeAll();
+        rootFrame.removeAll();
         try {
             Screen.screens.get("error").display(message);
         } catch (NullPointerException ex){
             System.out.println("Screen '" + "error" + "' not initialized.");
         }
-        parent.revalidate();
-        parent.repaint();
+        rootFrame.revalidate();
+        rootFrame.repaint();
     }
 }
 

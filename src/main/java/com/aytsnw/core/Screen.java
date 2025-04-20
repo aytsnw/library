@@ -1,10 +1,10 @@
 package com.aytsnw.core;
 
 import com.aytsnw.devices.Alternator;
-import com.aytsnw.devices.ScreenDisplayer;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,38 +16,38 @@ public abstract  class Screen {
     protected HashMap<String, Object> elements = new HashMap<>();
 
     private String name;
-    protected RootWindow parent;
+    protected JPanel rootFrame;
     protected String title;
 
-    protected Screen(String name, String title, RootWindow root){
+    protected Screen(String name, String title, JPanel rootFrame){
         this.name = name;
         this.title = title;
-        this.parent = root;
+        this.rootFrame = rootFrame;
         screens.put(name, this);
     }
-    protected void drawNavBar(){
-        JButton mainBtn = createButton("Main Menu");
-        bindRoute("index", mainBtn);
-        JButton returnBtn = createButton("Return");
-        bindRoute("prev", returnBtn);
+
+    protected void addToParent(Component component){
+        this.rootFrame.add(component);
     }
 
     protected JButton createButton(String text){
         JButton btn = new JButton(text);
-        this.parent.add(btn);
+        btn.setPreferredSize(new Dimension(20, 20));
+        addToParent(btn);
         return btn;
     }
 
-    protected void drawHeader(){
-        JLabel header = new JLabel(this.title);
-        drawNavBar();
-        parent.add(header);
+    protected void drawNavBar(){
+        bindRoute("index", createButton("Main Menu"));
+        bindRoute("prev", createButton("Return"));
     }
 
-    protected JLabel createLabel(String labelText){
-        JLabel label = new JLabel(labelText);
-        addToParent(label);
-        return label;
+    protected void drawHeader(){
+        drawNavBar();
+        JLabel l = createLabel(this.title);
+        l.setFont(new Font("Arial", Font.BOLD, 22));
+        l.setAlignmentX(Component.CENTER_ALIGNMENT);
+        l.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     protected void bindRoute(String routeName, JButton btn){
@@ -75,15 +75,17 @@ public abstract  class Screen {
         });
     }
 
-    protected void addToParent(Component component){
-        this.parent.add(component);
+    protected JLabel createLabel(String labelText){
+        JLabel label = new JLabel(labelText);
+        addToParent(label);
+        return label;
     }
 
     protected JTextField createField(String fieldName, int width){
-        JLabel label = new JLabel(fieldName);
+        createLabel(fieldName);
         JTextField entry = new JTextField(width);
+        entry.setMaximumSize(entry.getPreferredSize());
         addToParent(entry);
-        addToParent(label);
         return entry;
     }
 
