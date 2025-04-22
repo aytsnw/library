@@ -4,6 +4,7 @@ import com.aytsnw.core.Route;
 import com.aytsnw.db.DbReader;
 import com.aytsnw.devices.BookValidator;
 import com.aytsnw.exceptions.InvalidInputException;
+import com.aytsnw.models.Book;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class SearchRoute extends Route {
             return;
         }
 
-        ArrayList<HashMap<String, Object>> bookRows = null;
+        ArrayList<Book> bookRows = null;
 
         try{
             bookRows = DbReader.readFromBooks(type, query);
@@ -45,6 +46,7 @@ public class SearchRoute extends Route {
 
         elements.put("book_rows", bookRows);
         elements.put("message", message);
+        elements.put("index", screenParams.getOrDefault("index", 0));
 
         renderScreen("search_results", elements);
     }

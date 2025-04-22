@@ -1,12 +1,13 @@
 package com.aytsnw.db;
 
+import com.aytsnw.models.Book;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DbReader {
-    public static ArrayList<HashMap<String, Object>> readFromBooks(String paramType, Object param) throws SQLException{
-        ArrayList<HashMap<String, Object>> rows = new ArrayList<>();
+    public static ArrayList<Book> readFromBooks(String paramType, Object param) throws SQLException{
+        ArrayList<Book> bookRows = new ArrayList<>();
 
         if (paramType.equals("title")){
             String query = String.format("SELECT * FROM books WHERE title LIKE '%%%s%%'", param);
@@ -21,18 +22,18 @@ public class DbReader {
         }
 
         while (DbManager.rs.next()){
-            HashMap<String, Object> row = new HashMap<>();
-            row.put("id", DbManager.rs.getString("id"));
-            row.put("title", DbManager.rs.getString("title"));
-            row.put("author", DbManager.rs.getString("author"));
-            row.put("isbn", DbManager.rs.getLong("isbn"));
-            row.put("year", DbManager.rs.getString("year"));
-            row.put("category", DbManager.rs.getString("category"));
-            row.put("loan_status", DbManager.rs.getString("loan_status"));
-            rows.add(row);
+            Book book = new Book();
+            book.setId(DbManager.rs.getInt("id"));
+            book.setTitle(DbManager.rs.getString("title"));
+            book.setAuthor(DbManager.rs.getString("author"));
+            book.setIsbn(DbManager.rs.getString("isbn"));
+            book.setYear(DbManager.rs.getString("year"));
+            book.setCategory(DbManager.rs.getString("category"));
+            book.setLoanStatus(DbManager.rs.getString("loan_status"));
+            bookRows.add(book);
         }
 
-        return rows;
+        return bookRows;
     }
 
     public static boolean checkUserExistence(String username) throws SQLException{
