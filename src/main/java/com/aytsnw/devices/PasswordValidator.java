@@ -7,7 +7,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import static com.aytsnw.db.DbReader.checkPasswordHash;
 
 public class PasswordValidator{
     public static void validatePassword(String password) throws InvalidInputException {

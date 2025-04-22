@@ -3,7 +3,7 @@ package com.aytsnw.routes;
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbWriter;
 import com.aytsnw.exceptions.InvalidInputException;
-import com.aytsnw.model.User;
+import com.aytsnw.models.User;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -20,6 +20,7 @@ public class RegisterRoute extends Route {
             user.setUsernameRegister((String) screenParams.get("username"));
             user.setPasswordHash((String) screenParams.get("password"),
                     (String) screenParams.get("password_confirm"));
+            user.setLevel((String) screenParams.get("level"));
         } catch (InvalidInputException ex) {
             renderErrorScreen(ex.getMessage());
             return;
@@ -29,6 +30,7 @@ public class RegisterRoute extends Route {
             elements.put("message", "User registered!");
             renderScreen("user_registered", elements);
         } catch (SQLException ex){
+            System.out.println(ex.getMessage());
             renderErrorScreen("Error during registration, try again!");
         }
         elements.clear();

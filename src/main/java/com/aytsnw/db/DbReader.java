@@ -42,11 +42,23 @@ public class DbReader {
         return DbManager.rs.next();
     }
 
-    public static String checkPasswordHash(String username) throws SQLException{
+    public static String lookUpPasswordHash(String username) throws SQLException{
         String query = "SELECT password_hash FROM users WHERE username = '%s'".formatted(username);
         System.out.println(query);
         DbManager.rs = DbManager.stmt.executeQuery(query);
-        DbManager.rs.next();
-        return DbManager.rs.getString("password_hash");
+        if (DbManager.rs.next()){
+            return DbManager.rs.getString("password_hash");
+        }
+        return null;
+    }
+
+    public static String lookUpUserLevel(String username) throws SQLException{
+        String query = "SELECT level FROM users WHERE username = '%s'".formatted(username);
+        System.out.println(query);
+        DbManager.rs = DbManager.stmt.executeQuery(query);
+        if (DbManager.rs.next()){
+            return DbManager.rs.getString("level");
+        }
+        return null;
     }
 }

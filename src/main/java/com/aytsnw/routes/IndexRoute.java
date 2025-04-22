@@ -3,6 +3,7 @@ package com.aytsnw.routes;
 import com.aytsnw.core.Route;
 import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.devices.ScreenDisplayer;
+import com.aytsnw.session.SessionManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +15,15 @@ public class IndexRoute extends Route {
     }
 
     @Override
-    public void process(HashMap<String, Object> screenParams) {renderScreen("main", elements);}
+    public void process(HashMap<String, Object> screenParams) {
+        System.out.println(SessionManager.session.get("username"));
+        System.out.println(SessionManager.session.get("level"));
+        renderScreen("main", elements);
+    }
 
     @Override
-    public void process() {renderScreen("main", elements);}
+    public void process() {
+        System.out.println(SessionManager.session.get("username"));
+        System.out.println(SessionManager.session.get("level"));
+        renderScreen("main", elements);}
 }

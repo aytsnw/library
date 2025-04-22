@@ -22,9 +22,7 @@ public class ScreenDisplayer {
         rootWindow.setVisible(true);
         rootWindow.setInitState(true);
 
-        GridLayout grd = new GridLayout(0,1);
-        grd.setVgap(6);
-        rootFrame.setLayout(grd);
+        rootFrame.setLayout(new GridLayout(0, 1));
         rootWindow.add(rootFrame);
     }
 

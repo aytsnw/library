@@ -1,6 +1,5 @@
-package com.aytsnw.model;
+package com.aytsnw.models;
 
-import com.aytsnw.db.DbReader;
 import com.aytsnw.devices.PasswordValidator;
 import com.aytsnw.devices.UsernameValidator;
 import com.aytsnw.exceptions.InvalidInputException;
@@ -12,6 +11,7 @@ public class User {
     private String username;
     private String password;
     private String passwordHash;
+    private String level;
 
     public User(){};
 
@@ -35,22 +35,22 @@ public class User {
         }
     }
 
+    public void setLevel(String level){
+        this.level = level;
+    }
+
     public void setPasswordHash(String password, String passwordConfirm) throws InvalidInputException {
         PasswordValidator.validatePassword(password);
         PasswordValidator.validatePasswordMatch(password, passwordConfirm);
         this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public void setPasswordHash(String password) throws InvalidInputException {
-        PasswordValidator.validatePassword(password);
-        this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
-    }
-
-    public void setPassword(String password){
+    public void setPasswordLogin(String password){
         this.password = password;
     }
 
     public String getUsername() {return username;}
     public String getPasswordHash() {return passwordHash;}
     public String getPassword() {return password;}
+    public String getLevel() {return level;}
 }

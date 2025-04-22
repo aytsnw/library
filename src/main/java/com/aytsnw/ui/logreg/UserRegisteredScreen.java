@@ -1,7 +1,6 @@
 package com.aytsnw.ui.logreg;
 
 import com.aytsnw.core.Screen;
-import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -14,7 +13,7 @@ public class UserRegisteredScreen extends Screen {
     @Override
     public void display(HashMap<String, Object> routeParams) {
         createLabel((String) routeParams.get("message"));
-        bindRoute("login", createButton("Login"));
+        bindRouteToButton("login", createButton("Login"));
     }
 
     @Override

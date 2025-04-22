@@ -1,4 +1,4 @@
-package com.aytsnw.model;
+package com.aytsnw.models;
 
 import com.aytsnw.devices.BookValidator;
 import com.aytsnw.exceptions.InvalidInputException;

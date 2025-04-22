@@ -1,10 +1,8 @@
 package com.aytsnw.core;
 
 import com.aytsnw.devices.Alternator;
-import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,20 +35,7 @@ public abstract  class Screen {
         return btn;
     }
 
-    protected void drawNavBar(){
-        bindRoute("index", createButton("Main Menu"));
-        bindRoute("prev", createButton("Return"));
-    }
-
-    protected void drawHeader(){
-        drawNavBar();
-        JLabel l = createLabel(this.title);
-        l.setFont(new Font("Arial", Font.BOLD, 22));
-        l.setAlignmentX(Component.CENTER_ALIGNMENT);
-        l.setHorizontalAlignment(SwingConstants.CENTER);
-    }
-
-    protected void bindRoute(String routeName, JButton btn){
+    protected void bindRouteToButton(String routeName, JButton btn){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,7 +50,7 @@ public abstract  class Screen {
         });
     }
 
-    protected void bindRoute(String routeName, JButton btn, HashMap<String, Object> params){
+    protected void bindRouteToButton(String routeName, JButton btn, HashMap<String, Object> params){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,6 +58,19 @@ public abstract  class Screen {
                 else Alternator.alternatePrev();
             }
         });
+    }
+
+    protected void drawNavBar(){
+        bindRouteToButton("index", createButton("Main Menu"));
+        bindRouteToButton("prev", createButton("Return"));
+    }
+
+    protected void drawHeader(){
+        drawNavBar();
+        JLabel l = createLabel(this.title);
+        l.setFont(new Font("Arial", Font.BOLD, 22));
+        l.setAlignmentX(Component.CENTER_ALIGNMENT);
+        l.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     protected JLabel createLabel(String labelText){

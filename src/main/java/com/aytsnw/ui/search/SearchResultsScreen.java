@@ -1,7 +1,6 @@
 package com.aytsnw.ui.search;
 
 import com.aytsnw.core.Screen;
-import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -44,14 +43,14 @@ public class SearchResultsScreen extends Screen {
     private void createRemoveBookButton(String id){
         JButton btn = new JButton("Remove from Library");
         elements.put("id", id);
-        bindRoute("remove_book", btn, elements);
+        bindRouteToButton("remove_book", btn, elements);
         addToParent(btn);
     }
 
     private void createBorrowBookButton(String id){
         JButton btn = new JButton("Borrow book");
         elements.put("id", id);
-        bindRoute("borrow_book", btn, elements);
+        bindRouteToButton("borrow_book", btn, elements);
         addToParent(btn);
     }
 

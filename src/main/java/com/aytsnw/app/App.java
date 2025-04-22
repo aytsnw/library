@@ -14,14 +14,14 @@ public class App {
         System.out.println("Initializing application....");
         try{
             DbManager.init();
-        } catch (SQLException e) {
+            TableCreator.createBooksTable();
+            TableCreator.createUsersTable();
+            TableCreator.createTransactionsTable();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("Terminating process due to SQL Error...");
             System.exit(1);
         }
-
-        TableCreator.createBooksTable();
-        TableCreator.createUsersTable();
-        TableCreator.createTransactionsTable();
 
         ScreenDisplayer.initRootWindow();
 

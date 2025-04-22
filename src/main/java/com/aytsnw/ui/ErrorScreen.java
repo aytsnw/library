@@ -1,7 +1,6 @@
 package com.aytsnw.ui;
 
 import com.aytsnw.core.Screen;
-import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -24,7 +23,7 @@ public class ErrorScreen extends Screen {
 
     @Override
     protected void drawHeader(){
-        bindRoute("prev", createButton("Return"));
+        bindRouteToButton("prev", createButton("Return"));
         JLabel l = createLabel(this.title);
         l.setFont(new Font("Arial", Font.BOLD, 24));
         l.setHorizontalAlignment(SwingConstants.CENTER);

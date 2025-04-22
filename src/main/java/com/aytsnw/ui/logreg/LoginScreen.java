@@ -2,10 +2,8 @@ package com.aytsnw.ui.logreg;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.devices.Alternator;
-import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +30,7 @@ public class LoginScreen extends Screen {
 
     private void drawLoginHeader(){
         JButton registerBtn = createButton("Register");
-        bindRoute("register", registerBtn);
+        bindRouteToButton("register", registerBtn);
         JLabel l = createLabel(this.title);
         l.setFont(new Font("Arial", Font.BOLD, 20));
         l.setHorizontalAlignment(SwingConstants.CENTER);

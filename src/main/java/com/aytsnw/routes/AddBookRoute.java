@@ -3,7 +3,7 @@ package com.aytsnw.routes;
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbWriter;
 import com.aytsnw.exceptions.InvalidInputException;
-import com.aytsnw.model.Book;
+import com.aytsnw.models.Book;
 
 import java.sql.SQLException;
 import java.util.HashMap;

@@ -1,13 +1,9 @@
 package com.aytsnw.ui;
 
 import com.aytsnw.core.Screen;
-import com.aytsnw.devices.Alternator;
-import com.aytsnw.windows.RootWindow;
+import com.aytsnw.session.SessionManager;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -20,9 +16,10 @@ public class MainMenuScreen extends Screen {
     @Override
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
-        bindRoute("add_book", createButton("Add Book"));
-        bindRoute("search_book", createButton("Search Book"));
-        bindRoute("exit", createButton("Exit"));
+        if (SessionManager.session.get("level").equals("librarian")) bindRouteToButton("add_book", createButton("Add Book"));
+
+        bindRouteToButton("search_book", createButton("Search Book"));
+        bindRouteToButton("exit", createButton("Exit"));
     }
 
     @Override
