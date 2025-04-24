@@ -18,7 +18,7 @@ public class PasswordValidator{
         }
     }
 
-    public static void validatePasswordMatch(String password, String passwordConfirm){
+    public static void validatePasswordMatch(String password, String passwordConfirm) throws InvalidInputException{
         if (!(password.equals(passwordConfirm))){
             throw new InvalidInputException("Passwords don't match!");
         }

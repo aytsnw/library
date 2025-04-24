@@ -2,6 +2,7 @@ package com.aytsnw.ui.search;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.devices.Alternator;
+import com.aytsnw.devices.ScreenDisplayer;
 import com.aytsnw.models.Book;
 import com.aytsnw.session.SessionManager;
 
@@ -20,25 +21,29 @@ public class SearchResultsScreen extends Screen {
     @Override
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
+        int bookRowsSize, currentIndex;
 
         ArrayList<Book> bookRows =  (ArrayList<Book>) routeParams.get("book_rows");
 
         if (bookRows == null){
-            System.out.println("'book_rows' not passed as argument.");
+            System.out.println("'book_rows' not passed as argument or is null.");
+            createLabel("No results for this query.");
             return;
         }
 
-        int bookRowsSize = bookRows.size();
-        int currentIndex = (Integer) routeParams.get("index");
+        currentIndex = (Integer) routeParams.get("index");
+        bookRowsSize = bookRows.size();
 
-        if (currentIndex >= bookRowsSize) {
-            System.out.println("Index out of bounds for book list fetch from Db");
-            createLabel("Internal error");
-            return;
-        }
         createBookFrame(bookRows.get(currentIndex));
 
-        if (currentIndex < bookRowsSize - 1) createNextButton(currentIndex);
+        if (currentIndex < bookRowsSize - 1){
+            routeParams.put("index", currentIndex);
+            createNextButton(routeParams);
+        }
+        if (currentIndex > 0){
+            routeParams.put("index", currentIndex);
+            createPrevButton(routeParams);
+        }
     }
 
     private void createBookFrame(Book book){
@@ -67,13 +72,24 @@ public class SearchResultsScreen extends Screen {
         addToParent(btn);
     }
 
-    private void createNextButton(int currentIndex){
+    private void createNextButton(HashMap<String, Object> routeParams){
         JButton nextBtn= createButton("Next book");
         nextBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                elements.replace("index", currentIndex + 1);
-                Alternator.alternateRoute("search_book");
+                routeParams.replace("index", (Integer) routeParams.get("index") + 1);
+                ScreenDisplayer.displayScreen("search_results", routeParams);
+            }
+        });
+    }
+
+    private void createPrevButton(HashMap<String, Object> routeParams){
+        JButton nextBtn= createButton("Previous book");
+        nextBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                routeParams.replace("index", (Integer) routeParams.get("index") - 1);
+                ScreenDisplayer.displayScreen("search_results", routeParams);
             }
         });
     }

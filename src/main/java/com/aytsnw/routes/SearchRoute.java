@@ -16,19 +16,16 @@ public class SearchRoute extends Route {
 
     @Override
     public void process(HashMap<String, Object> screenParams) {
-        String type = null;
-        String query = null;
+        String type, query = null;
         String message = "";
 
         try {
             type = (String) screenParams.get("type");
             query = (String) screenParams.get("entry");
-            if (type.equals("title")){
-                BookValidator.validateTitle(query);}
-            else if (type.equals("isbn")){
-                BookValidator.validateIsbn(query);}
+            if (type.equals("title")) BookValidator.validateTitle(query);
+            else if (type.equals("isbn")) BookValidator.validateIsbn(query);
         } catch (InvalidInputException ex){
-            renderErrorScreen("Empty parameter!");
+            renderErrorScreen(ex.getMessage());
             return;
         }
 
@@ -36,7 +33,7 @@ public class SearchRoute extends Route {
 
         try{
             bookRows = DbReader.readFromBooks(type, query);
-        } catch (SQLException ex){
+        } catch (SQLException | InvalidInputException ex){
             message = "SQL Error: Couldn't Select from db.";
             System.out.println(ex.getMessage());
             elements.put("message", message);
@@ -46,7 +43,7 @@ public class SearchRoute extends Route {
 
         elements.put("book_rows", bookRows);
         elements.put("message", message);
-        elements.put("index", screenParams.getOrDefault("index", 0));
+        elements.put("index", 0);
 
         renderScreen("search_results", elements);
     }

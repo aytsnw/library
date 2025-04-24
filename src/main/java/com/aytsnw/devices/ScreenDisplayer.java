@@ -28,11 +28,8 @@ public class ScreenDisplayer {
 
     public static void displayScreen(String screenName, HashMap<String, Object> params){
         rootFrame.removeAll();
-        try{
-            Screen.screens.get(screenName).display(params);
-        } catch (NullPointerException ex){
-            System.out.println("Screen '" + screenName + "' not initialized.");
-        }
+        if (Screen.screens.get(screenName) == null) {System.out.println("Screen '" + screenName + "' not initialized."); return;}
+        Screen.screens.get(screenName).display(params);
         rootFrame.revalidate();
         rootFrame.repaint();
     }

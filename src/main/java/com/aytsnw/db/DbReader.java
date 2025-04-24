@@ -1,12 +1,13 @@
 package com.aytsnw.db;
 
+import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.models.Book;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DbReader {
-    public static ArrayList<Book> readFromBooks(String paramType, Object param) throws SQLException{
+    public static ArrayList<Book> readFromBooks(String paramType, Object param) throws SQLException, InvalidInputException{
         ArrayList<Book> bookRows = new ArrayList<>();
 
         if (paramType.equals("title")){
@@ -18,7 +19,7 @@ public class DbReader {
             System.out.println("Executing: " + query);
             DbManager.rs = DbManager.stmt.executeQuery(query);
         } else {
-            System.out.println("Bad parameter type: '" + param + "'.");
+            throw new InvalidInputException("Bad parameter type: '" + param + "'.");
         }
 
         while (DbManager.rs.next()){
@@ -33,6 +34,7 @@ public class DbReader {
             bookRows.add(book);
         }
 
+        if (bookRows.isEmpty()) return null;
         return bookRows;
     }
 

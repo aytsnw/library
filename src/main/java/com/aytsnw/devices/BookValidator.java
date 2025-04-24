@@ -5,18 +5,6 @@ import com.aytsnw.exceptions.InvalidInputException;
 import java.util.HashMap;
 
 public class BookValidator {
-    public static void validate(HashMap<String, Object> columns) throws InvalidInputException, NullPointerException{
-            validateTitle( (String) columns.get("title"));
-            validateAuthor( (String) columns.get("author"));
-            String isbn = (String) columns.get("isbn");
-            validateIsbn(isbn);
-            columns.replace("isbn", parseIsbn(isbn));
-            validatePublisher( (String) columns.get("publisher"));
-            String year = (String) columns.get("year");
-            validateYear(year);
-            columns.replace("year", parseYear(year));
-            validateCategory( (String) columns.get("category"));
-    }
 
     public static void validateTitle(String title) throws InvalidInputException{
         if (title.isEmpty()){throw new InvalidInputException("Empty title!");}
