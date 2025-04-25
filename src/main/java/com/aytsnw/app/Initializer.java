@@ -22,11 +22,11 @@ public class Initializer {
         SearchRoute searchRoute = new SearchRoute("search_book");
         RemoveBookRoute removeBookRoute = new RemoveBookRoute("remove_book");
         BorrowBookRoute borrowBookRoute = new BorrowBookRoute("borrow_book");
+        MyBooksRoute booksRoute = new MyBooksRoute("my_books");
     }
 
     public static void initScreens(){
-        MainMenuScreen mainScreen = new MainMenuScreen("main", "Main Menu", ScreenDisplayer.getRootFrame()
-        );
+        MainMenuScreen mainScreen = new MainMenuScreen("main", "Main Menu", ScreenDisplayer.getRootFrame());
         LoginScreen loginScreen = new LoginScreen("login", "Login", ScreenDisplayer.getRootFrame());
         RegisterScreen registerScreen = new RegisterScreen("register", "Register", ScreenDisplayer.getRootFrame());
         UserRegisteredScreen userRegisteredScreen = new UserRegisteredScreen("user_registered", "User Registered!", ScreenDisplayer.getRootFrame());

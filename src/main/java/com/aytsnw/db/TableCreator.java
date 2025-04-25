@@ -38,4 +38,14 @@ public class TableCreator {
 
         System.out.println("Table: 'transactions' created or already exists.");
     }
+
+    public static void createUsersBooksTable() throws SQLException{
+        DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users_books ("+
+                "user_id INTEGER NOT NULL," +
+                "book_id INTEGER NOT NULL,"  +
+                "FOREIGN KEY (user_id) REFERENCES users(id)," +
+                "FOREIGN KEY (book_id) REFERENCES books(id))");
+
+        System.out.println("Table: 'users_books' created or already exists.");
+    }
 }

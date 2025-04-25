@@ -1,6 +1,6 @@
 package com.aytsnw.exceptions;
 
-public class InvalidInputException extends Exception {
+public class InvalidInputException extends RuntimeException {
     public InvalidInputException() {
       super("Invalid input.");
     }

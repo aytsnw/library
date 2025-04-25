@@ -5,6 +5,7 @@ import com.aytsnw.db.DbReader;
 import com.aytsnw.devices.BookValidator;
 import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.models.Book;
+import com.aytsnw.session.SessionManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,14 +35,13 @@ public class SearchRoute extends Route {
         try{
             bookRows = DbReader.readFromBooks(type, query);
         } catch (SQLException | InvalidInputException ex){
-            message = "SQL Error: Couldn't Select from db.";
             System.out.println(ex.getMessage());
-            elements.put("message", message);
-            renderScreen("error", elements);
+            renderErrorScreen("SQL Error: Couldn't Select from db.");
             return;
         }
 
         elements.put("book_rows", bookRows);
+        elements.put("user_id", SessionManager.session.get("user_id"));
         elements.put("message", message);
         elements.put("index", 0);
 

@@ -1,5 +1,7 @@
 package com.aytsnw.db;
 
+import com.aytsnw.app.Initializer;
+import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.models.Book;
 import com.aytsnw.models.User;
 
@@ -27,11 +29,17 @@ public class DbWriter {
         DbManager.stmt.executeUpdate("DELETE FROM books WHERE id = %s".formatted(id));
     }
 
-    public static void updateLoanStatus(String id, String operation) throws SQLException{
-        if (operation.equals("borrow")){
-            DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'on_loan' WHERE id = %s".formatted(id));
-        } else if (operation.equals("return")){
-            DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'available' WHERE id = %s".formatted(id));
+    public static void updateLoanStatus(String userId, String bookId, String operation) throws SQLException, InvalidInputException{
+        switch (operation){
+            case "borrow" ->{
+                DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'on_loan' WHERE id = %s".formatted(userId));
+                DbManager.stmt.executeUpdate("INSERT INTO users_books (user_id, book_id) VALUES(%s, %s)".formatted(userId, bookId));
+            }
+            case "return" ->{
+                DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'available' WHERE id = %s".formatted(userId));
+                DbManager.stmt.executeUpdate("DELETE FROM users_books (user_id, book_id) VALUES(%s, %s)".formatted(userId, bookId));
+            }
+            default -> throw new InvalidInputException("Bad operation, must be 'borrow' or 'return'.");
         }
     }
 }

@@ -3,7 +3,11 @@ package com.aytsnw.routes;
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbReader;
 import com.aytsnw.devices.Alternator;
+import com.aytsnw.devices.PasswordValidator;
+import com.aytsnw.devices.UsernameValidator;
 import com.aytsnw.exceptions.InvalidInputException;
+import com.aytsnw.exceptions.UserAlreadyExistsException;
+import com.aytsnw.exceptions.WrongCredentialsException;
 import com.aytsnw.models.User;
 import com.aytsnw.session.SessionManager;
 import org.mindrot.jbcrypt.BCrypt;
@@ -17,33 +21,31 @@ public class LoginRoute extends Route {
     @Override
     public void process(HashMap<String, Object> screenParams) {
         User user = new User();
+        String username = (String) screenParams.get("username");
+        String password = (String) screenParams.get("password");
 
         try{
-            user.setUsernameLogin((String) screenParams.get("username"));
-            user.setPasswordLogin((String) screenParams.get("password"));
-            checkPasswordHash(user.getUsername(), user.getPassword());
-            user.setLevel(lookUpUserLevel(user.getUsername()));
+            UsernameValidator.checkUserExistenceInDb(username, "login");
+            user.setUsername(username);
+            PasswordValidator.validatePasswordWithDb(username, password);
+            user.setPassword(password);
+            user.setLevel(lookUpUserLevel(username));
+            user.setId(lookUpUserId(username));
             SessionManager.addUserToSession(user);
             Alternator.alternateRoute("index");
-        } catch (InvalidInputException ex) {
-            renderErrorScreen(ex.getMessage());
-        } catch ( SQLException ex){
-            renderErrorScreen("Error during login. Try again!");
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            renderErrorScreen("Error during login. Try again!");
+        } catch (WrongCredentialsException ex){
+            renderErrorScreen(ex.getMessage());
         }
+
     }
 
     private String lookUpUserLevel(String username) throws SQLException{return DbReader.lookUpUserLevel(username);}
 
-    private void checkPasswordHash(String username,String password) throws InvalidInputException, SQLException{
-        String passwordHashFromDb = DbReader.lookUpPasswordHash(username);
-        if (!(BCrypt.checkpw(password, passwordHashFromDb))){
-            throw new InvalidInputException("Wrong password!");
-        }
-    }
+    private Integer lookUpUserId(String username) throws SQLException {return DbReader.lookUpUserId(username);}
 
     @Override
-    public void process() {
-        renderScreen("login");
-    }
+    public void process() {renderScreen("login");}
 }

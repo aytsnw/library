@@ -9,18 +9,23 @@ import java.util.ArrayList;
 public class DbReader {
     public static ArrayList<Book> readFromBooks(String paramType, Object param) throws SQLException, InvalidInputException{
         ArrayList<Book> bookRows = new ArrayList<>();
+        String query = null;
 
-        if (paramType.equals("title")){
-            String query = String.format("SELECT * FROM books WHERE title LIKE '%%%s%%'", param);
-            System.out.println("Executing: " + query);
-            DbManager.rs = DbManager.stmt.executeQuery(query);
-        } else if (paramType.equals("isbn")){
-            String query = String.format("SELECT * FROM books WHERE isbn = %s", param);
-            System.out.println("Executing: " + query);
-            DbManager.rs = DbManager.stmt.executeQuery(query);
-        } else {
-            throw new InvalidInputException("Bad parameter type: '" + param + "'.");
+        switch (paramType) {
+            case "title" -> {
+                query = String.format("SELECT * FROM books WHERE title LIKE '%%%s%%'", param);
+                System.out.println("Executing: " + query);
+            }
+            case "isbn" -> {
+                query = String.format("SELECT * FROM books WHERE isbn = %s", param);
+                System.out.println("Executing: " + query);
+            }
+            case "username" ->
+                    query = String.format("SELECT * FROM users_books JOIN books ON book_id = books.id JOIN users ON user_id = users.id WHERE users.username = '%s'", param);
+            default -> throw new InvalidInputException("Bad parameter type: '" + param + "'.");
         }
+
+        DbManager.rs = DbManager.stmt.executeQuery(query);
 
         while (DbManager.rs.next()){
             Book book = new Book();
@@ -61,6 +66,16 @@ public class DbReader {
         DbManager.rs = DbManager.stmt.executeQuery(query);
         if (DbManager.rs.next()){
             return DbManager.rs.getString("level");
+        }
+        return null;
+    }
+
+    public static Integer lookUpUserId(String username) throws SQLException{
+        String query = "SELECT id FROM users WHERE username = '%s'".formatted(username);
+        System.out.println(query);
+        DbManager.rs = DbManager.stmt.executeQuery(query);
+        if (DbManager.rs.next()){
+            return DbManager.rs.getInt("id");
         }
         return null;
     }

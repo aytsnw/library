@@ -8,6 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.SQLException;
 
 public class User {
+    private Integer id;
     private String username;
     private String password;
     private String passwordHash;
@@ -15,40 +16,20 @@ public class User {
 
     public User(){};
 
-    public void setUsernameRegister(String username) throws InvalidInputException {
-        UsernameValidator.validateUsername(username);
-        try{
-            if (UsernameValidator.checkUserExistenceInDb(username)) throw new InvalidInputException("Username already exists.");
-            else this.username = username;
-        }catch (SQLException ex) {
-            System.out.println("SQL Error during reading from table: 'users': " + ex.getMessage());
-        }
-    }
+    public void setId(Integer id){this.id = id;}
 
-    public void setUsernameLogin(String username) throws InvalidInputException{
-        UsernameValidator.validateUsername(username);
-        try{
-            if (!UsernameValidator.checkUserExistenceInDb(username)) throw new InvalidInputException("Username don't exist.");
-            else this.username = username;
-        }catch (SQLException ex) {
-            System.out.println("SQL Error during reading from table: 'users': " + ex.getMessage());
-        }
-    }
+    public void setUsername(String username) throws InvalidInputException {this.username = username;}
 
-    public void setLevel(String level){
-        this.level = level;
-    }
+    public void setPassword(String password){this.password = password;}
 
-    public void setPasswordHash(String password, String passwordConfirm) throws InvalidInputException {
-        PasswordValidator.validatePassword(password);
-        PasswordValidator.validatePasswordMatch(password, passwordConfirm);
+    public void setLevel(String level){this.level = level;}
+
+    public void setPasswordHash(String password) throws InvalidInputException {
         this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public void setPasswordLogin(String password){
-        this.password = password;
-    }
 
+    public Integer getId() {return id;}
     public String getUsername() {return username;}
     public String getPasswordHash() {return passwordHash;}
     public String getPassword() {return password;}

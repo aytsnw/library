@@ -34,7 +34,7 @@ public class SearchResultsScreen extends Screen {
         currentIndex = (Integer) routeParams.get("index");
         bookRowsSize = bookRows.size();
 
-        createBookFrame(bookRows.get(currentIndex));
+        createBookFrame(bookRows.get(currentIndex), routeParams.get("user_id").toString());
 
         if (currentIndex < bookRowsSize - 1){
             routeParams.put("index", currentIndex);
@@ -46,7 +46,7 @@ public class SearchResultsScreen extends Screen {
         }
     }
 
-    private void createBookFrame(Book book){
+    private void createBookFrame(Book book, String userId){
         addToParent(new JLabel("Title: " + book.getTitle()));
         addToParent(new JLabel("Author: " + book.getAuthor()));
         addToParent(new JLabel("ISBN: " + book.getIsbn()));
@@ -54,20 +54,22 @@ public class SearchResultsScreen extends Screen {
         addToParent(new JLabel("Category: " +  book.getCategory()));
         addToParent(new JLabel("Status: " + book.getLoanStatus()));
 
-        if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(book.getId().toString());
-        if (!book.getLoanStatus().equals("on_loan")) createBorrowBookButton(book.getId().toString());
+        if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId().toString());
+        if (!book.getLoanStatus().equals("on_loan")) createBorrowBookButton(userId, book.getId().toString());
     }
 
-    private void createRemoveBookButton(String id){
+    private void createRemoveBookButton(String userId, String bookId){
         JButton btn = new JButton("Remove from Library");
-        elements.put("id", id);
+        elements.put("user_id", userId);
+        elements.put("book_id", bookId);
         bindRouteToButton("remove_book", btn, elements);
         addToParent(btn);
     }
 
-    private void createBorrowBookButton(String id){
+    private void createBorrowBookButton(String userId, String bookId){
         JButton btn = new JButton("Borrow book");
-        elements.put("id", id);
+        elements.put("user_id", userId);
+        elements.put("book_id", bookId);
         bindRouteToButton("borrow_book", btn, elements);
         addToParent(btn);
     }

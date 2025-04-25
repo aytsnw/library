@@ -17,6 +17,7 @@ public class App {
             TableCreator.createBooksTable();
             TableCreator.createUsersTable();
             TableCreator.createTransactionsTable();
+            TableCreator.createUsersBooksTable();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Terminating process due to SQL Error...");

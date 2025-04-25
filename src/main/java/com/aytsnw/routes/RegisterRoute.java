@@ -2,6 +2,8 @@ package com.aytsnw.routes;
 
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbWriter;
+import com.aytsnw.devices.PasswordValidator;
+import com.aytsnw.devices.UsernameValidator;
 import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.models.User;
 
@@ -16,23 +18,26 @@ public class RegisterRoute extends Route {
     @Override
     public void process(HashMap<String, Object> screenParams) {
         User user = new User();
+        String username = (String) screenParams.get("username");
+        String password = (String) screenParams.get("password");
+        String passwordConfirm = (String) screenParams.get("password_confirm");
+
         try{
-            user.setUsernameRegister((String) screenParams.get("username"));
-            user.setPasswordHash((String) screenParams.get("password"),
-                    (String) screenParams.get("password_confirm"));
+            UsernameValidator.validateUsername(username);
+            user.setUsername(username);
+            PasswordValidator.validatePasswordRegistration(password, passwordConfirm);
+            user.setPasswordHash(password);
             user.setLevel((String) screenParams.get("level"));
-        } catch (InvalidInputException ex) {
-            renderErrorScreen(ex.getMessage());
-            return;
-        }
-        try{
             register(user);
             elements.put("message", "User registered!");
             renderScreen("user_registered", elements);
+        } catch (InvalidInputException ex) {
+            renderErrorScreen(ex.getMessage());
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
-            renderErrorScreen("Error during registration, try again!");
+            renderErrorScreen("An error occurred during registration. Try again!");
         }
+
         elements.clear();
     }
 
