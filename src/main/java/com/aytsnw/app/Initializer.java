@@ -23,6 +23,7 @@ public class Initializer {
         RemoveBookRoute removeBookRoute = new RemoveBookRoute("remove_book");
         BorrowBookRoute borrowBookRoute = new BorrowBookRoute("borrow_book");
         MyBooksRoute booksRoute = new MyBooksRoute("my_books");
+        ReturnBookRoute returnBookRoute = new ReturnBookRoute("return_book");
     }
 
     public static void initScreens(){
@@ -37,5 +38,7 @@ public class Initializer {
         BookRemovedScreen bookRemovedScreen = new BookRemovedScreen("book_removed", "Book Deletion", ScreenDisplayer.getRootFrame());
         BookBorrowedScreen bookBorrowedScreen = new BookBorrowedScreen("book_borrowed", "Book Borrowing", ScreenDisplayer.getRootFrame());
         ErrorScreen errorScreen = new ErrorScreen("error", "Error", ScreenDisplayer.getRootFrame());
+        MyBooksScreen myBooksScreen = new MyBooksScreen("my_books", "My Books", ScreenDisplayer.getRootFrame());
+        BookReturnedScreen bookReturnedScreen = new BookReturnedScreen("book_returned", "Returning Book", ScreenDisplayer.getRootFrame());
     }
 }

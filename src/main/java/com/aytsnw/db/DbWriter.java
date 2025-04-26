@@ -1,6 +1,7 @@
 package com.aytsnw.db;
 
 import com.aytsnw.app.Initializer;
+import com.aytsnw.exceptions.BadArgumentException;
 import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.models.Book;
 import com.aytsnw.models.User;
@@ -27,19 +28,22 @@ public class DbWriter {
 
     public static void deleteFromBooks(String id) throws SQLException{
         DbManager.stmt.executeUpdate("DELETE FROM books WHERE id = %s".formatted(id));
+        DbManager.stmt.executeUpdate("DELETE FROM users_books WHERE book_id = %s".formatted(id));
     }
 
-    public static void updateLoanStatus(String userId, String bookId, String operation) throws SQLException, InvalidInputException{
+    public static void updateLoanStatus(String userId, String bookId, String operation) throws SQLException{
         switch (operation){
             case "borrow" ->{
-                DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'on_loan' WHERE id = %s".formatted(userId));
+                DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'loaned' WHERE id = %s".formatted(bookId));
                 DbManager.stmt.executeUpdate("INSERT INTO users_books (user_id, book_id) VALUES(%s, %s)".formatted(userId, bookId));
+                DbManager.stmt.executeUpdate("INSERT INTO transactions (type, user_id, book_id) VALUES('%s', %s, %s)".formatted("borrow", userId, bookId));
             }
             case "return" ->{
-                DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'available' WHERE id = %s".formatted(userId));
-                DbManager.stmt.executeUpdate("DELETE FROM users_books (user_id, book_id) VALUES(%s, %s)".formatted(userId, bookId));
+                DbManager.stmt.executeUpdate("UPDATE books SET loan_status = 'available' WHERE id = %s".formatted(bookId));
+                DbManager.stmt.executeUpdate("DELETE FROM users_books WHERE user_id = %s AND book_id = %s".formatted(userId, bookId));
+                DbManager.stmt.executeUpdate("INSERT INTO transactions (type, user_id, book_id) VALUES('%s', %s, %s)".formatted("return", userId, bookId));
             }
-            default -> throw new InvalidInputException("Bad operation, must be 'borrow' or 'return'.");
+            default -> throw new BadArgumentException("Bad operation, must be 'borrow' or 'return'.");
         }
     }
 }

@@ -8,25 +8,25 @@ import com.aytsnw.exceptions.InvalidInputException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class BorrowBookRoute extends Route {
+public class ReturnBookRoute extends Route {
 
-    public BorrowBookRoute(String name) {
+    public ReturnBookRoute(String name) {
         super(name);
     }
 
     @Override
     public void process(HashMap<String, Object> screenParams) {
         try{
-            DbWriter.updateLoanStatus(screenParams.get("user_id").toString(), screenParams.get("book_id").toString(), "borrow");
+            DbWriter.updateLoanStatus(screenParams.get("user_id").toString(), screenParams.get("book_id").toString(), "return");
         } catch (SQLException | InvalidInputException ex){
-            System.out.println("SQL Error: Couldn't execute loan.");
+            System.out.println("SQL Error: Couldn't execute return.");
             System.out.println(ex.getMessage());
-            renderErrorScreen("Failed to borrow book.");
+            renderErrorScreen("Failed to return book, try again.");
             return;
         }
 
-        elements.put("message", "Book borrowed!");
-        renderScreen("book_borrowed", elements);
+        elements.put("message", "Book returned to Library!");
+        renderScreen("book_returned", elements);
     }
 
     @Override

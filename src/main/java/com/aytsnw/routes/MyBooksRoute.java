@@ -31,6 +31,6 @@ public class MyBooksRoute extends Route {
         elements.put("user_id", SessionManager.session.get("user_id"));
         elements.put("book_rows", bookRows);
         elements.put("index", 0);
-        renderScreen("search_results", elements);
+        renderScreen("my_books", elements);
     }
 }

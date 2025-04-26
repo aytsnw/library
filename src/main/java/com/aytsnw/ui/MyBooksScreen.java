@@ -1,4 +1,4 @@
-package com.aytsnw.ui.search;
+package com.aytsnw.ui;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.devices.Alternator;
@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SearchResultsScreen extends Screen {
+public class MyBooksScreen extends Screen {
 
-    public SearchResultsScreen(String name, String title, JPanel rootFrame) {
+    public MyBooksScreen(String name, String title, JPanel rootFrame) {
         super(name, title, rootFrame);
     }
 
@@ -54,8 +54,8 @@ public class SearchResultsScreen extends Screen {
         addToParent(new JLabel("Category: " +  book.getCategory()));
         addToParent(new JLabel("Status: " + book.getLoanStatus()));
 
+        createReturnBookButton(userId, book.getId().toString());
         if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId().toString());
-        if (!book.getLoanStatus().equals("loaned")) createBorrowBookButton(userId, book.getId().toString());
     }
 
     private void createRemoveBookButton(String userId, String bookId){
@@ -66,11 +66,11 @@ public class SearchResultsScreen extends Screen {
         addToParent(btn);
     }
 
-    private void createBorrowBookButton(String userId, String bookId){
-        JButton btn = new JButton("Borrow book");
+    private void createReturnBookButton(String userId, String bookId){
+        JButton btn = new JButton("Return book");
         elements.put("user_id", userId);
         elements.put("book_id", bookId);
-        bindRouteToButton("borrow_book", btn, elements);
+        bindRouteToButton("return_book", btn, elements);
         addToParent(btn);
     }
 
