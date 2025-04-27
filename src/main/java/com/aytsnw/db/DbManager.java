@@ -7,8 +7,7 @@ public class DbManager {
     private final static String user = CredentialsManager.getUser();
     private final static String pass = CredentialsManager.getPassword();
 
-    public static Statement stmt = null;
-    public static ResultSet rs = null;
+    protected static Connection conn = null;
 
     public static void init() throws SQLException{
         loadDriver();
@@ -30,8 +29,7 @@ public class DbManager {
     static void createConnection() throws SQLException{
         try {
             System.out.println("Creating connection with MySQL Server...");
-            Connection conn = DriverManager.getConnection(url, user, pass);
-            stmt = conn.createStatement();
+            conn = DriverManager.getConnection(url, user, pass);
         } catch (SQLException ex){
             System.out.println("SQL Error: couldn't instantiate connection");
             throw new SQLException();
@@ -39,6 +37,7 @@ public class DbManager {
     }
 
     private static void createDb(String dbName) throws SQLException{
+        Statement stmt = conn.createStatement();
         try {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dbName);
             System.out.println("Database " + dbName + " created or already exists.");
@@ -49,6 +48,7 @@ public class DbManager {
     }
 
     private static void selectDb(String dbName) throws SQLException{
+        Statement stmt = conn.createStatement();
         try {
             stmt.executeUpdate("USE " + dbName);
         } catch (SQLException ex){

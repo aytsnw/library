@@ -51,6 +51,7 @@ public class RegisterScreen extends Screen {
     }
 
     private void drawRegisterHeader(){
+        bindRouteToButton("exit", createButton("Exit App"));
         JButton registerBtn = createButton("Login");
         bindRouteToButton("login", registerBtn);
         JLabel l = createLabel(this.title);

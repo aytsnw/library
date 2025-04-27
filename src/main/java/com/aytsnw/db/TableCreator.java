@@ -1,10 +1,12 @@
 package com.aytsnw.db;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class TableCreator {
     public static void createBooksTable() throws SQLException{
-        DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books ("+
+        Statement stmt = DbManager.conn.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS books ("+
                 "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                 "title TEXT," +
                 "author TEXT," +
@@ -17,7 +19,8 @@ public class TableCreator {
     }
 
     public static void createUsersTable() throws SQLException{
-        DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users ("+
+        Statement stmt = DbManager.conn.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users ("+
                 "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                 "username TEXT NOT NULL," +
                 "level TEXT NOT NULL," +
@@ -27,7 +30,8 @@ public class TableCreator {
     }
 
     public static void createTransactionsTable() throws SQLException{
-        DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS transactions ("+
+        Statement stmt = DbManager.conn.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS transactions ("+
                 "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                 "type TEXT," +
                 "user_id INTEGER NOT NULL," +
@@ -40,7 +44,8 @@ public class TableCreator {
     }
 
     public static void createUsersBooksTable() throws SQLException{
-        DbManager.stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users_books ("+
+        Statement stmt = DbManager.conn.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users_books ("+
                 "user_id INTEGER NOT NULL," +
                 "book_id INTEGER NOT NULL,"  +
                 "FOREIGN KEY (user_id) REFERENCES users(id)," +

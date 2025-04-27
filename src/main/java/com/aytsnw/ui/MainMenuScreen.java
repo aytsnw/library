@@ -19,7 +19,7 @@ public class MainMenuScreen extends Screen {
         if (SessionManager.session.get("level").equals("librarian")) bindRouteToButton("add_book", createButton("Add Book"));
         bindRouteToButton("my_books", createButton("My Books"));
         bindRouteToButton("search_book", createButton("Search Book"));
-        bindRouteToButton("exit", createButton("Exit"));
+        bindRouteToButton("logout", createButton("Logout"));
     }
 
     @Override

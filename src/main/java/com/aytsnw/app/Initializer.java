@@ -24,6 +24,8 @@ public class Initializer {
         BorrowBookRoute borrowBookRoute = new BorrowBookRoute("borrow_book");
         MyBooksRoute booksRoute = new MyBooksRoute("my_books");
         ReturnBookRoute returnBookRoute = new ReturnBookRoute("return_book");
+        LogoutRoute logoutRoute = new LogoutRoute("logout");
+        ExitRoute exitRoute = new ExitRoute("exit");
     }
 
     public static void initScreens(){

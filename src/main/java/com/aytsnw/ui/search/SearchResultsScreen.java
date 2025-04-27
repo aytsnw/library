@@ -34,7 +34,7 @@ public class SearchResultsScreen extends Screen {
         currentIndex = (Integer) routeParams.get("index");
         bookRowsSize = bookRows.size();
 
-        createBookFrame(bookRows.get(currentIndex), routeParams.get("user_id").toString());
+        createBookFrame(bookRows.get(currentIndex), Integer.parseInt(routeParams.get("user_id").toString()));
 
         if (currentIndex < bookRowsSize - 1){
             routeParams.put("index", currentIndex);
@@ -46,7 +46,7 @@ public class SearchResultsScreen extends Screen {
         }
     }
 
-    private void createBookFrame(Book book, String userId){
+    private void createBookFrame(Book book, Integer userId){
         addToParent(new JLabel("Title: " + book.getTitle()));
         addToParent(new JLabel("Author: " + book.getAuthor()));
         addToParent(new JLabel("ISBN: " + book.getIsbn()));
@@ -54,11 +54,11 @@ public class SearchResultsScreen extends Screen {
         addToParent(new JLabel("Category: " +  book.getCategory()));
         addToParent(new JLabel("Status: " + book.getLoanStatus()));
 
-        if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId().toString());
-        if (!book.getLoanStatus().equals("loaned")) createBorrowBookButton(userId, book.getId().toString());
+        if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId());
+        if (!book.getLoanStatus().equals("loaned")) createBorrowBookButton(userId, book.getId());
     }
 
-    private void createRemoveBookButton(String userId, String bookId){
+    private void createRemoveBookButton(Integer userId, Integer bookId){
         JButton btn = new JButton("Remove from Library");
         elements.put("user_id", userId);
         elements.put("book_id", bookId);
@@ -66,7 +66,7 @@ public class SearchResultsScreen extends Screen {
         addToParent(btn);
     }
 
-    private void createBorrowBookButton(String userId, String bookId){
+    private void createBorrowBookButton(Integer userId, Integer bookId){
         JButton btn = new JButton("Borrow book");
         elements.put("user_id", userId);
         elements.put("book_id", bookId);

@@ -29,6 +29,7 @@ public class LoginScreen extends Screen {
     public void display(String message) {}
 
     private void drawLoginHeader(){
+        bindRouteToButton("exit", createButton("Exit App"));
         JButton registerBtn = createButton("Register");
         bindRouteToButton("register", registerBtn);
         JLabel l = createLabel(this.title);
