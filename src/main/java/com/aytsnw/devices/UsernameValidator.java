@@ -9,7 +9,7 @@ import com.aytsnw.exceptions.WrongCredentialsException;
 import java.sql.SQLException;
 
 public class UsernameValidator {
-    public static void validateUsername(String username) throws InvalidInputException, SQLException {
+    public static void validateUsername(String username) throws SQLException {
         if (username.isEmpty()){
             throw new InvalidInputException("Empty username.");
         }

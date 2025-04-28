@@ -1,7 +1,6 @@
-package com.aytsnw.ui;
+package com.aytsnw.ui.search;
 
 import com.aytsnw.core.Screen;
-import com.aytsnw.devices.Alternator;
 import com.aytsnw.devices.ScreenDisplayer;
 import com.aytsnw.models.Book;
 import com.aytsnw.session.SessionManager;

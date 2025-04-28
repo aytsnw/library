@@ -39,13 +39,9 @@ public abstract  class Screen {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!(routeName.equals("prev"))) {
-                    System.out.println("Calling via route name");
-                    Alternator.alternateRoute(routeName);}
-                else {
-                    System.out.println("Calling via alternate prev");
-                    Alternator.alternatePrev();
-                }
+                if (routeName.equals("prev")) Alternator.alternatePrev();
+                else if (routeName.equals("current")) Alternator.alternateCurrent();
+                else Alternator.alternateRoute(routeName);
             }
         });
     }
@@ -54,8 +50,9 @@ public abstract  class Screen {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!(routeName.equals("prev"))) Alternator.alternateRoute(routeName, params);
-                else Alternator.alternatePrev();
+                if (routeName.equals("prev")) Alternator.alternatePrev();
+                else if (routeName.equals("current")) Alternator.alternateCurrent();
+                else Alternator.alternateRoute(routeName, params);
             }
         });
     }

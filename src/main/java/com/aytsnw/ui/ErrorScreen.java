@@ -23,7 +23,7 @@ public class ErrorScreen extends Screen {
 
     @Override
     protected void drawHeader(){
-        bindRouteToButton("prev", createButton("Return"));
+        bindRouteToButton("current", createButton("Return"));
         JLabel l = createLabel(this.title);
         l.setFont(new Font("Arial", Font.BOLD, 24));
         l.setHorizontalAlignment(SwingConstants.CENTER);

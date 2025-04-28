@@ -5,6 +5,7 @@ import com.aytsnw.db.DbWriter;
 import com.aytsnw.devices.PasswordValidator;
 import com.aytsnw.devices.UsernameValidator;
 import com.aytsnw.exceptions.InvalidInputException;
+import com.aytsnw.exceptions.UserAlreadyExistsException;
 import com.aytsnw.models.User;
 
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class RegisterRoute extends Route {
             register(user);
             elements.put("message", "User registered!");
             renderScreen("user_registered", elements);
-        } catch (InvalidInputException ex) {
+        } catch (InvalidInputException | UserAlreadyExistsException ex) {
             renderErrorScreen(ex.getMessage());
         } catch (SQLException ex){
             System.out.println(ex.getMessage());

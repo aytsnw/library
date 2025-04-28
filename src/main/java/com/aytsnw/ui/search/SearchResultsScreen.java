@@ -24,7 +24,6 @@ public class SearchResultsScreen extends Screen {
         int bookRowsSize, currentIndex;
 
         ArrayList<Book> bookRows =  (ArrayList<Book>) routeParams.get("book_rows");
-
         if (bookRows == null){
             System.out.println("'book_rows' not passed as argument or is null.");
             createLabel("No results for this query.");
@@ -33,6 +32,7 @@ public class SearchResultsScreen extends Screen {
 
         currentIndex = (Integer) routeParams.get("index");
         bookRowsSize = bookRows.size();
+        createLabel("Showing " + bookRowsSize + " results for query: "+ routeParams.get("query"));
 
         createBookFrame(bookRows.get(currentIndex), Integer.parseInt(routeParams.get("user_id").toString()));
 

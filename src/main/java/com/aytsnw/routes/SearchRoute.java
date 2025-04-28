@@ -44,6 +44,7 @@ public class SearchRoute extends Route {
         elements.put("user_id", SessionManager.session.get("user_id"));
         elements.put("message", message);
         elements.put("index", 0);
+        elements.put("query", query);
 
         renderScreen("search_results", elements);
     }

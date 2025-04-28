@@ -3,13 +3,11 @@ package com.aytsnw.app;
 import com.aytsnw.devices.ScreenDisplayer;
 import com.aytsnw.routes.*;
 import com.aytsnw.ui.*;
-import com.aytsnw.ui.bookcrud.AddBookScreen;
-import com.aytsnw.ui.bookcrud.BookAddedScreen;
-import com.aytsnw.ui.bookcrud.BookBorrowedScreen;
-import com.aytsnw.ui.bookcrud.BookRemovedScreen;
+import com.aytsnw.ui.bookcrud.*;
 import com.aytsnw.ui.logreg.LoginScreen;
 import com.aytsnw.ui.logreg.RegisterScreen;
 import com.aytsnw.ui.logreg.UserRegisteredScreen;
+import com.aytsnw.ui.search.MyBooksScreen;
 import com.aytsnw.ui.search.SearchResultsScreen;
 import com.aytsnw.ui.search.SearchScreen;
 

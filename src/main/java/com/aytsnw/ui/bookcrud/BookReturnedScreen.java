@@ -1,4 +1,4 @@
-package com.aytsnw.ui;
+package com.aytsnw.ui.bookcrud;
 
 import com.aytsnw.core.Screen;
 

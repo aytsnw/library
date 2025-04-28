@@ -38,7 +38,7 @@ public class DbReader {
     private static void readBooksByIsbn(Object param) throws SQLException{
         String sql = "SELECT * FROM books WHERE isbn = ?";
         stmt = conn.prepareStatement(sql);
-        stmt.setLong(1, (long) param);
+        stmt.setLong(1, Long.parseLong((String) param));
     }
 
     private static void readBooksByUsername(Object param) throws SQLException{
