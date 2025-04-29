@@ -21,9 +21,11 @@ public class AddBookRoute extends Route {
             renderScreen("book_added", elements);
         } catch (InvalidInputException ex){
             renderErrorScreen("Couldn't add book to database: " + ex.getMessage());
+            ex.printStackTrace();
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
             renderErrorScreen("Couldn't add book to database: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

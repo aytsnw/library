@@ -16,7 +16,13 @@ public class ScreenDisplayer {
     }
 
     public static void initRootWindow(){
-        rootWindow.setSize(350, 500);
+        Dimension monitorSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double monitorWidth = monitorSize.getWidth();
+        double monitorHeight = monitorSize.getHeight();
+        int windowWidth = 350;
+        int windowHeight = 550;
+        rootWindow.setLocation((int) (monitorWidth/2) - windowWidth/2, (int) (monitorHeight/2) - windowHeight/2);
+        rootWindow.setSize(windowWidth, windowHeight);
         rootWindow.setDefaultCloseOperation(RootWindow.EXIT_ON_CLOSE);
         rootWindow.setLayout(new FlowLayout());
         rootWindow.setVisible(true);
@@ -44,11 +50,8 @@ public class ScreenDisplayer {
 
     public static void displayErrorScreen(String message){
         rootFrame.removeAll();
-        try {
-            Screen.screens.get("error").display(message);
-        } catch (NullPointerException ex){
-            System.out.println("Screen '" + "error" + "' not initialized.");
-        }
+        if (Screen.screens.get("error") == null) {System.out.println("Screen '" + "error" + "' not initialized."); return;}
+        Screen.screens.get("error").display(message);
         rootFrame.revalidate();
         rootFrame.repaint();
     }

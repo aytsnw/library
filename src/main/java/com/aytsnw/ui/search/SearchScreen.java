@@ -2,7 +2,6 @@ package com.aytsnw.ui.search;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.devices.Alternator;
-import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,12 +25,13 @@ public class SearchScreen extends Screen {
         JTextField titleEntry = new JTextField(20);
         addToParent(titleEntry);
         JButton searchTitleBtn = createButton("Search by Title");
-        bindFormSubmitting("title", "search_book", searchTitleBtn, titleEntry);
+        createLabel("");
+        bindFormSubmission("title", "search_book", searchTitleBtn, titleEntry);
 
         JTextField isbnEntry = new JTextField(20);
         addToParent(isbnEntry);
         JButton searchIsbn = createButton("Search by ISBN");
-        bindFormSubmitting("isbn", "search_book", searchIsbn, isbnEntry);
+        bindFormSubmission("isbn", "search_book", searchIsbn, isbnEntry);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SearchScreen extends Screen {
 
     }
 
-    void bindFormSubmitting(String type, String routeName, JButton btn, JTextField entry){
+    void bindFormSubmission(String type, String routeName, JButton btn, JTextField entry){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -27,6 +27,7 @@ public class BorrowBookRoute extends Route {
             System.out.println("SQL Error: Couldn't execute loan.");
             System.out.println(ex.getMessage());
             renderErrorScreen("Failed to borrow book.");
+            ex.printStackTrace();
             return;
         }
 

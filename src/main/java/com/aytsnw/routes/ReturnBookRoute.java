@@ -27,6 +27,7 @@ public class ReturnBookRoute extends Route {
             System.out.println("SQL Error: Couldn't execute return.");
             System.out.println(ex.getMessage());
             renderErrorScreen("Failed to return book, try again.");
+            ex.printStackTrace();
             return;
         }
 

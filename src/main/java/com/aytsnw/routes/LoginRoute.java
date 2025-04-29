@@ -36,8 +36,10 @@ public class LoginRoute extends Route {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             renderErrorScreen("Error during login. Try again!");
+            ex.printStackTrace();
         } catch (WrongCredentialsException ex){
             renderErrorScreen(ex.getMessage());
+            ex.printStackTrace();
         }
 
     }

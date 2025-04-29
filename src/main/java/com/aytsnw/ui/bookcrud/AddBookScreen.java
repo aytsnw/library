@@ -2,7 +2,6 @@ package com.aytsnw.ui.bookcrud;
 
 import com.aytsnw.core.Screen;
 import com.aytsnw.devices.Alternator;
-import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,12 +26,12 @@ public class AddBookScreen extends Screen {
         fields.put("year", createField("Year", 20));
         fields.put("category", createField("Category", 20));
 
-        JButton submitBtn = new JButton();
+        JButton submitBtn = new JButton("Add Book");
         addToParent(submitBtn);
-        bindAction("add_book", submitBtn);
+        bindFormSubmission("add_book", submitBtn);
     }
 
-     private void bindAction(String routeName, JButton btn){
+     private void bindFormSubmission(String routeName, JButton btn){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

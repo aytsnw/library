@@ -34,10 +34,8 @@ public class RegisterScreen extends Screen {
     private void drawRegisterForm(){
         JTextField username = createField("Username", 20);
         fields.put("username", username);
-
         JTextField password = createField("Password", 20);
         fields.put("password", password);
-
         JTextField passwordConfirm = createField("Confirm Password", 20);
         fields.put("password_confirm", passwordConfirm);
 
@@ -54,6 +52,7 @@ public class RegisterScreen extends Screen {
         bindRouteToButton("exit", createButton("Exit App"));
         JButton registerBtn = createButton("Login");
         bindRouteToButton("login", registerBtn);
+        addToParent(new JPanel());
         JLabel l = createLabel(this.title);
         l.setFont(new Font("Arial", Font.BOLD, 20));
         l.setHorizontalAlignment(SwingConstants.CENTER);

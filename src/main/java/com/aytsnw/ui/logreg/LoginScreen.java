@@ -32,6 +32,7 @@ public class LoginScreen extends Screen {
         bindRouteToButton("exit", createButton("Exit App"));
         JButton registerBtn = createButton("Register");
         bindRouteToButton("register", registerBtn);
+        createLabel("");
         JLabel l = createLabel(this.title);
         l.setFont(new Font("Arial", Font.BOLD, 20));
         l.setHorizontalAlignment(SwingConstants.CENTER);

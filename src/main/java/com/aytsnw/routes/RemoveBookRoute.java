@@ -18,6 +18,7 @@ public class RemoveBookRoute extends Route {
             System.out.println(ex.getMessage());
             elements.put("message", "Error deleting book.");
             renderScreen("error", elements);
+            ex.printStackTrace();
             return;
         }
         elements.put("message", "Book removed successfully");

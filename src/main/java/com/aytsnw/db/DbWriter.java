@@ -16,7 +16,7 @@ public class DbWriter {
 
     public static void writeToBooks(Book book) throws SQLException {
         String sql = "INSERT INTO books (title, author, isbn, publisher, year, category, loan_status)" +
-                " VALUES(?, ?, ?, ?, ?, ?, available)";
+                " VALUES(?, ?, ?, ?, ?, ?, 'available')";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, book.getTitle());
         stmt.setString(2, book.getAuthor());

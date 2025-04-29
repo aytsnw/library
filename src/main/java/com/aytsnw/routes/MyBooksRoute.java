@@ -27,6 +27,7 @@ public class MyBooksRoute extends Route {
         } catch (SQLException | InvalidInputException ex){
             System.out.println(ex.getMessage());
             renderErrorScreen("Error when retrieving books from database.");
+            ex.printStackTrace();
         }
         elements.put("user_id", SessionManager.session.get("user_id"));
         elements.put("book_rows", bookRows);

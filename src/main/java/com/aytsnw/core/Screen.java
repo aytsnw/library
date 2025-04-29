@@ -30,7 +30,7 @@ public abstract  class Screen {
 
     protected JButton createButton(String text){
         JButton btn = new JButton(text);
-        btn.setPreferredSize(new Dimension(20, 20));
+        btn.setMinimumSize(new Dimension(50, 20));
         addToParent(btn);
         return btn;
     }
@@ -64,14 +64,25 @@ public abstract  class Screen {
 
     protected void drawHeader(){
         drawNavBar();
+        createLabel("");
         JLabel l = createLabel(this.title);
         l.setFont(new Font("Arial", Font.BOLD, 22));
         l.setAlignmentX(Component.CENTER_ALIGNMENT);
         l.setHorizontalAlignment(SwingConstants.CENTER);
+        addToParent(new JPanel());
     }
 
     protected JLabel createLabel(String labelText){
         JLabel label = new JLabel(labelText);
+        addToParent(label);
+        return label;
+    }
+
+    protected JLabel createLabel(String labelText, int fontSize, boolean bold){
+        JLabel label = new JLabel(labelText);
+        if (bold) label.setFont(new Font("Arial", Font.BOLD, fontSize));
+        else label.setFont(new Font("Arial", Font.PLAIN, fontSize));
+
         addToParent(label);
         return label;
     }

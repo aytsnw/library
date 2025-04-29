@@ -34,9 +34,11 @@ public class RegisterRoute extends Route {
             renderScreen("user_registered", elements);
         } catch (InvalidInputException | UserAlreadyExistsException ex) {
             renderErrorScreen(ex.getMessage());
+            ex.printStackTrace();
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
             renderErrorScreen("An error occurred during registration. Try again!");
+            ex.printStackTrace();
         }
 
         elements.clear();

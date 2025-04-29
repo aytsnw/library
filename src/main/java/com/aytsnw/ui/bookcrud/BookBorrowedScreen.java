@@ -4,6 +4,8 @@ import com.aytsnw.core.Screen;
 import com.aytsnw.windows.RootWindow;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.HashMap;
 
 public class BookBorrowedScreen extends Screen {

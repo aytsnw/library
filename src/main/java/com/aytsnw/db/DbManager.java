@@ -23,6 +23,7 @@ public class DbManager {
         } catch (Exception ex){
             System.out.println("Couldn't load driver.");
             System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
@@ -31,8 +32,7 @@ public class DbManager {
             System.out.println("Creating connection with MySQL Server...");
             conn = DriverManager.getConnection(url, user, pass);
         } catch (SQLException ex){
-            System.out.println("SQL Error: couldn't instantiate connection");
-            throw new SQLException();
+            throw new SQLException("SQL Error: couldn't instantiate connection");
         }
     }
 
@@ -42,8 +42,7 @@ public class DbManager {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dbName);
             System.out.println("Database " + dbName + " created or already exists.");
         } catch (SQLException | NullPointerException ex){
-            System.out.println("SQL Error: Couldn't create database");
-            throw new SQLException();
+            throw new SQLException("SQL Error: couldn't instantiate connection");
         }
     }
 
@@ -52,8 +51,7 @@ public class DbManager {
         try {
             stmt.executeUpdate("USE " + dbName);
         } catch (SQLException ex){
-            System.out.println("SQL Error: Couldn't select database " + dbName);
-            throw new SQLException();
+            throw new SQLException("SQL Error: couldn't instantiate connection");
         }
     }
 }

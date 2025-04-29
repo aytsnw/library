@@ -27,6 +27,7 @@ public class SearchRoute extends Route {
             else if (type.equals("isbn")) BookValidator.validateIsbn(query);
         } catch (InvalidInputException ex){
             renderErrorScreen(ex.getMessage());
+            ex.printStackTrace();
             return;
         }
 
@@ -37,6 +38,7 @@ public class SearchRoute extends Route {
         } catch (SQLException | InvalidInputException ex){
             System.out.println(ex.getMessage());
             renderErrorScreen("SQL Error: Couldn't Select from db.");
+            ex.printStackTrace();
             return;
         }
 

@@ -32,7 +32,7 @@ public class SearchResultsScreen extends Screen {
 
         currentIndex = (Integer) routeParams.get("index");
         bookRowsSize = bookRows.size();
-        createLabel("Showing " + bookRowsSize + " results for query: "+ routeParams.get("query"));
+        createLabel("Showing " + (currentIndex + 1) + " of " + bookRowsSize + " results for query: "+ routeParams.get("query"), 17, true);
 
         createBookFrame(bookRows.get(currentIndex), Integer.parseInt(routeParams.get("user_id").toString()));
 
@@ -56,6 +56,8 @@ public class SearchResultsScreen extends Screen {
 
         if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId());
         if (!book.getLoanStatus().equals("loaned")) createBorrowBookButton(userId, book.getId());
+        createLabel("");
+        createLabel("");
     }
 
     private void createRemoveBookButton(Integer userId, Integer bookId){

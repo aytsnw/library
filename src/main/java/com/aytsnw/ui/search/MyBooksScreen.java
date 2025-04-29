@@ -33,6 +33,8 @@ public class MyBooksScreen extends Screen {
         currentIndex = (Integer) routeParams.get("index");
         bookRowsSize = bookRows.size();
 
+        createLabel("Showing " + (currentIndex + 1) + " of " + bookRowsSize + " from your books", 17, true);
+
         createBookFrame(bookRows.get(currentIndex), routeParams.get("user_id").toString());
 
         if (currentIndex < bookRowsSize - 1){
@@ -55,6 +57,8 @@ public class MyBooksScreen extends Screen {
 
         createReturnBookButton(userId, book.getId().toString());
         if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId().toString());
+        createLabel("");
+        createLabel("");
     }
 
     private void createRemoveBookButton(String userId, String bookId){
@@ -79,7 +83,7 @@ public class MyBooksScreen extends Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 routeParams.replace("index", (Integer) routeParams.get("index") + 1);
-                ScreenDisplayer.displayScreen("search_results", routeParams);
+                ScreenDisplayer.displayScreen("my_books", routeParams);
             }
         });
     }
@@ -90,7 +94,7 @@ public class MyBooksScreen extends Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 routeParams.replace("index", (Integer) routeParams.get("index") - 1);
-                ScreenDisplayer.displayScreen("search_results", routeParams);
+                ScreenDisplayer.displayScreen("my_books", routeParams);
             }
         });
     }

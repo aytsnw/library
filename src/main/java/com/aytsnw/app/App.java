@@ -21,6 +21,7 @@ public class App {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Terminating process due to SQL Error...");
+            ex.printStackTrace();
             System.exit(1);
         }
 
