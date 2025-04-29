@@ -16,7 +16,7 @@ public class BookBorrowedScreen extends Screen {
     @Override
     public void display(HashMap<String, Object> routeParams) {
         drawHeader();
-        addToParent(new JLabel((String) routeParams.get("message")));
+        createLabel((String) routeParams.get("message"));
     }
 
     @Override

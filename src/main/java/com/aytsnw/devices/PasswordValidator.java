@@ -14,8 +14,7 @@ public class PasswordValidator{
         if (password.isEmpty()){
             throw new InvalidInputException("Empty password!");
         } else if(password.length() < 6){
-            throw new InvalidInputException("Password too short. Try setting a password with at least" +
-                    "6 characters");
+            throw new InvalidInputException("Password too short. Try at least 6 characters.");
         }
         validatePasswordMatch(password, passwordConfirm);
     }

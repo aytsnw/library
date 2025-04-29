@@ -26,6 +26,7 @@ public class App {
         }
 
         ScreenDisplayer.initRootWindow();
+        ScreenDisplayer.initRootFrame();
 
         Initializer.initRoutes();
         Initializer.initScreens();

@@ -55,6 +55,7 @@ public class DbReader {
             book.setTitle(rs.getString("title"));
             book.setAuthor(rs.getString("author"));
             book.setIsbn(rs.getString("isbn"));
+            book.setPublisher(rs.getString("publisher"));
             book.setYear(rs.getString("year"));
             book.setCategory(rs.getString("category"));
             book.setLoanStatus(rs.getString("loan_status"));

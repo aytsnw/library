@@ -29,7 +29,7 @@ public class DbWriter {
 
 
     public static void writeToUsers(User user) throws SQLException{
-        String sql = "INSERT INTO users (username, password_hash, level) VALUES('%s', '%s', '%s')";
+        String sql = "INSERT INTO users (username, password_hash, level) VALUES(?, ?, ?)";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1,user.getUsername());
         stmt.setString(2, user.getPasswordHash());

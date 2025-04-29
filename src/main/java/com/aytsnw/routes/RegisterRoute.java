@@ -40,7 +40,6 @@ public class RegisterRoute extends Route {
             renderErrorScreen("An error occurred during registration. Try again!");
             ex.printStackTrace();
         }
-
         elements.clear();
     }
 
@@ -48,8 +47,7 @@ public class RegisterRoute extends Route {
         try {
             DbWriter.writeToUsers(user);
         } catch (SQLException ex){
-            System.out.println("SQL Error during writing user to db : " + ex.getMessage());
-            throw new SQLException();
+            throw new SQLException("SQL Error during writing user to db : " + ex.getMessage());
         }
     }
 

@@ -19,16 +19,21 @@ public class ScreenDisplayer {
         Dimension monitorSize = Toolkit.getDefaultToolkit().getScreenSize();
         double monitorWidth = monitorSize.getWidth();
         double monitorHeight = monitorSize.getHeight();
-        int windowWidth = 350;
-        int windowHeight = 550;
+        int windowWidth = 420;
+        int windowHeight = 570;
         rootWindow.setLocation((int) (monitorWidth/2) - windowWidth/2, (int) (monitorHeight/2) - windowHeight/2);
         rootWindow.setSize(windowWidth, windowHeight);
         rootWindow.setDefaultCloseOperation(RootWindow.EXIT_ON_CLOSE);
         rootWindow.setLayout(new FlowLayout());
+        rootWindow.setIconImage(new ImageIcon("resources/icon/icon.png").getImage());
+        rootWindow.getContentPane().setBackground(new Color(102, 51, 0));
         rootWindow.setVisible(true);
         rootWindow.setInitState(true);
+    }
 
+    public static void initRootFrame(){
         rootFrame.setLayout(new GridLayout(0, 1));
+        rootFrame.setBackground(new Color(102, 51, 0));
         rootWindow.add(rootFrame);
     }
 

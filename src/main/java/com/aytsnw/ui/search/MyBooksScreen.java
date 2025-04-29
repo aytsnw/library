@@ -48,12 +48,14 @@ public class MyBooksScreen extends Screen {
     }
 
     private void createBookFrame(Book book, String userId){
-        addToParent(new JLabel("Title: " + book.getTitle()));
-        addToParent(new JLabel("Author: " + book.getAuthor()));
-        addToParent(new JLabel("ISBN: " + book.getIsbn()));
-        addToParent(new JLabel("Year: " + book.getYear()));
-        addToParent(new JLabel("Category: " +  book.getCategory()));
-        addToParent(new JLabel("Status: " + book.getLoanStatus()));
+        createLabel("");
+        createLabel(("Title: " + book.getTitle()));
+        createLabel(("Author: " + book.getAuthor()));
+        createLabel(("ISBN: " + book.getIsbn()));
+        createLabel("Publisher: " + book.getPublisher());
+        createLabel(("Year: " + book.getYear()));
+        createLabel(("Category: " +  book.getCategory()));
+        createLabel(("Status: " + book.getLoanStatus()));
 
         createReturnBookButton(userId, book.getId().toString());
         if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId().toString());
@@ -62,7 +64,7 @@ public class MyBooksScreen extends Screen {
     }
 
     private void createRemoveBookButton(String userId, String bookId){
-        JButton btn = new JButton("Remove from Library");
+        JButton btn = createButton("Remove from Library");
         elements.put("user_id", userId);
         elements.put("book_id", bookId);
         bindRouteToButton("remove_book", btn, elements);
@@ -70,7 +72,7 @@ public class MyBooksScreen extends Screen {
     }
 
     private void createReturnBookButton(String userId, String bookId){
-        JButton btn = new JButton("Return book");
+        JButton btn = createButton("Return book");
         elements.put("user_id", userId);
         elements.put("book_id", bookId);
         bindRouteToButton("return_book", btn, elements);
@@ -78,7 +80,7 @@ public class MyBooksScreen extends Screen {
     }
 
     private void createNextButton(HashMap<String, Object> routeParams){
-        JButton nextBtn= createButton("Next book");
+        JButton nextBtn = createButton("Next book");
         nextBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

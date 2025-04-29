@@ -26,8 +26,7 @@ public class AddBookScreen extends Screen {
         fields.put("year", createField("Year", 20));
         fields.put("category", createField("Category", 20));
 
-        JButton submitBtn = new JButton("Add Book");
-        addToParent(submitBtn);
+        JButton submitBtn = createButton("Add Book");
         bindFormSubmission("add_book", submitBtn);
     }
 

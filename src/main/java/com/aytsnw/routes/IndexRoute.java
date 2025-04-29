@@ -23,7 +23,7 @@ public class IndexRoute extends Route {
 
     @Override
     public void process() {
-        System.out.println(SessionManager.session.get("username"));
         System.out.println(SessionManager.session.get("level"));
+        elements.put("username", SessionManager.session.get("username"));
         renderScreen("main", elements);}
 }

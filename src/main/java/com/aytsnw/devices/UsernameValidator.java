@@ -18,8 +18,8 @@ public class UsernameValidator {
 
     public static void checkUserExistenceInDb(String username, String operation) throws SQLException{
         switch (operation){
-            case "login" -> {if(!(DbReader.checkUserExistence(username))) throw new WrongCredentialsException();}
-            case "register" -> {if(DbReader.checkUserExistence(username)) throw new UserAlreadyExistsException();}
+            case "login" -> {if(!(DbReader.checkUserExistence(username))) throw new WrongCredentialsException("Username doesn't exist.");}
+            case "register" -> {if(DbReader.checkUserExistence(username)) throw new UserAlreadyExistsException("Username already exists.");}
             default -> throw new BadArgumentException("Bad operation argument: " + operation + ". Try 'login' | 'register'.");
         }
     }

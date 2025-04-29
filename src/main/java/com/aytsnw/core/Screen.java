@@ -31,6 +31,8 @@ public abstract  class Screen {
     protected JButton createButton(String text){
         JButton btn = new JButton(text);
         btn.setMinimumSize(new Dimension(50, 20));
+        btn.setBackground(new Color(153, 102, 51));
+        btn.setForeground(new Color(255, 255, 255));
         addToParent(btn);
         return btn;
     }
@@ -67,19 +69,23 @@ public abstract  class Screen {
         createLabel("");
         JLabel l = createLabel(this.title);
         l.setFont(new Font("Arial", Font.BOLD, 22));
-        l.setAlignmentX(Component.CENTER_ALIGNMENT);
-        l.setHorizontalAlignment(SwingConstants.CENTER);
-        addToParent(new JPanel());
+        createLabel("");
     }
 
     protected JLabel createLabel(String labelText){
         JLabel label = new JLabel(labelText);
+        label.setForeground(new Color(255, 255, 255));
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         addToParent(label);
         return label;
     }
 
     protected JLabel createLabel(String labelText, int fontSize, boolean bold){
         JLabel label = new JLabel(labelText);
+        label.setForeground(new Color(255, 255, 255));
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         if (bold) label.setFont(new Font("Arial", Font.BOLD, fontSize));
         else label.setFont(new Font("Arial", Font.PLAIN, fontSize));
 
@@ -90,6 +96,14 @@ public abstract  class Screen {
     protected JTextField createField(String fieldName, int width){
         createLabel(fieldName);
         JTextField entry = new JTextField(width);
+        entry.setMaximumSize(entry.getPreferredSize());
+        addToParent(entry);
+        return entry;
+    }
+
+    protected JTextField createPasswordField(String fieldName, int width){
+        createLabel(fieldName);
+        JTextField entry = new JPasswordField(width);
         entry.setMaximumSize(entry.getPreferredSize());
         addToParent(entry);
         return entry;

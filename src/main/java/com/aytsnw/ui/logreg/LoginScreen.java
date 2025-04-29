@@ -41,7 +41,7 @@ public class LoginScreen extends Screen {
     private void drawLoginForm(){
         JTextField username = createField("Username", 20);
         fields.put("username", username);
-        JTextField password = createField("Password", 20);
+        JTextField password = createPasswordField("Password", 20);
         fields.put("password", password);
         JButton submitBtn = createButton("Login");
         bindAction("login", submitBtn);
