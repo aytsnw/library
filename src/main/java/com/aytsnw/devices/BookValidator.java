@@ -16,7 +16,7 @@ public class BookValidator {
 
     public static Long validateIsbn(String isbn) throws InvalidInputException{
         if (isbn.isEmpty()){throw new InvalidInputException("Empty ISBN!");}
-        else if (isbn.length() != 13 && isbn.length() != 10 ){throw new InvalidInputException("Invalid ISBN! (It must contain 13 or 10 digits)");}
+        else if (isbn.length() != 13 && isbn.length() != 10 ){throw new InvalidInputException("ISBN must have 13 or 10 digits");}
         else {
             try{return Long.parseLong(isbn);}
             catch (NumberFormatException ex){throw new InvalidInputException("Invalid ISBN!");}
