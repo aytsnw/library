@@ -35,7 +35,7 @@ public class MyBooksScreen extends Screen {
 
         createLabel("Showing " + (currentIndex + 1) + " of " + bookRowsSize + " from your books", 17, true);
 
-        createBookFrame(bookRows.get(currentIndex), routeParams.get("user_id").toString());
+        createBookFrame(bookRows.get(currentIndex), (Integer) routeParams.get("user_id"));
 
         if (currentIndex < bookRowsSize - 1){
             routeParams.put("index", currentIndex);
@@ -47,7 +47,7 @@ public class MyBooksScreen extends Screen {
         }
     }
 
-    private void createBookFrame(Book book, String userId){
+    private void createBookFrame(Book book, Integer userId){
         createLabel("");
         createLabel(("Title: " + book.getTitle()));
         createLabel(("Author: " + book.getAuthor()));
@@ -55,15 +55,15 @@ public class MyBooksScreen extends Screen {
         createLabel("Publisher: " + book.getPublisher());
         createLabel(("Year: " + book.getYear()));
         createLabel(("Category: " +  book.getCategory()));
-        createLabel(("Status: " + book.getLoanStatus()));
+        createLabel(("Status: " + book.getStatus()));
 
-        createReturnBookButton(userId, book.getId().toString());
-        if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId().toString());
+        createReturnBookButton(userId, book.getId());
+        if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId());
         createLabel("");
         createLabel("");
     }
 
-    private void createRemoveBookButton(String userId, String bookId){
+    private void createRemoveBookButton(Integer userId, Integer bookId){
         JButton btn = createButton("Remove from Library");
         elements.put("user_id", userId);
         elements.put("book_id", bookId);
@@ -71,7 +71,7 @@ public class MyBooksScreen extends Screen {
         addToParent(btn);
     }
 
-    private void createReturnBookButton(String userId, String bookId){
+    private void createReturnBookButton(Integer userId, Integer bookId){
         JButton btn = createButton("Return book");
         elements.put("user_id", userId);
         elements.put("book_id", bookId);

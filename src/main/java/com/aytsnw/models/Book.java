@@ -11,7 +11,7 @@ public class Book {
     private String publisher;
     private Integer year;
     private String category;
-    private String loanStatus;
+    private String status;
 
     public Integer getId() {return id;}
     public String getTitle() {return title;}
@@ -20,7 +20,7 @@ public class Book {
     public String getPublisher() {return publisher;}
     public Integer getYear() {return year;}
     public String getCategory() {return category;}
-    public String getLoanStatus() {return loanStatus;}
+    public String getStatus() {return status;}
 
     public void setId(Integer id) {this.id = id;}
 
@@ -52,5 +52,5 @@ public class Book {
         this.category = category;
     }
 
-    public void setLoanStatus (String loanStatus){this.loanStatus = loanStatus;}
+    public void setStatus(String loanStatus){this.status = loanStatus;}
 }

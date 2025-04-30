@@ -12,7 +12,7 @@ public class RemoveBookRoute extends Route {
     @Override
     public void process(HashMap<String, Object> screenParams) {
         try{
-            DbWriter.deleteFromBooks((String) screenParams.get("id"));
+            DbWriter.deleteFromBooks((Integer) screenParams.get("book_id"));
         } catch (SQLException ex){
             System.out.println("SQL Error: couldn't delete from 'books' table");
             System.out.println(ex.getMessage());

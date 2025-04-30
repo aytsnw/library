@@ -24,7 +24,7 @@ public class AddBookRoute extends Route {
             ex.printStackTrace();
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
-            renderErrorScreen("Couldn't add book to database: " + ex.getMessage());
+            renderErrorScreen("Couldn't add book to database, try again!");
             ex.printStackTrace();
         }
     }

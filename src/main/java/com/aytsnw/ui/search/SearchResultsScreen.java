@@ -1,7 +1,6 @@
 package com.aytsnw.ui.search;
 
 import com.aytsnw.core.Screen;
-import com.aytsnw.devices.Alternator;
 import com.aytsnw.devices.ScreenDisplayer;
 import com.aytsnw.models.Book;
 import com.aytsnw.session.SessionManager;
@@ -55,12 +54,12 @@ public class SearchResultsScreen extends Screen {
         createLabel("Publisher: " + book.getPublisher());
         createLabel("Year: " + book.getYear());
         createLabel("Category: " +  book.getCategory());
-        String loanStatus = book.getLoanStatus();
+        String loanStatus = book.getStatus();
         JLabel l = createLabel("Status: " + loanStatus);
         if (loanStatus.equals("available")) l.setForeground(new Color(0, 200, 0));
 
         if (SessionManager.session.get("level").equals("librarian")) createRemoveBookButton(userId, book.getId());
-        if (!book.getLoanStatus().equals("loaned")) createBorrowBookButton(userId, book.getId());
+        if (!book.getStatus().equals("loaned")) createBorrowBookButton(userId, book.getId());
         createLabel("");
         createLabel("");
     }

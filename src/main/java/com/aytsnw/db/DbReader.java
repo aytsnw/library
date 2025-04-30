@@ -30,20 +30,20 @@ public class DbReader {
     }
 
     private static void readBooksByTitle(Object param) throws SQLException{
-        String sql = "SELECT * FROM books WHERE title LIKE ?";
+        String sql = "SELECT * FROM books WHERE title LIKE ? AND status != 'inactive'";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, "%" + param + "%");
     }
 
     private static void readBooksByIsbn(Object param) throws SQLException{
-        String sql = "SELECT * FROM books WHERE isbn = ?";
+        String sql = "SELECT * FROM books WHERE isbn = ? AND status != 'inactive'";
         stmt = conn.prepareStatement(sql);
         stmt.setLong(1, Long.parseLong((String) param));
     }
 
     private static void readBooksByUsername(Object param) throws SQLException{
         String sql = "SELECT * FROM users_books JOIN books ON book_id = books.id " +
-                "JOIN users ON user_id = users.id WHERE users.username = ?";
+                "JOIN users ON user_id = users.id WHERE users.username = ? AND books.status != 'inactive'";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, param.toString());
     }
@@ -58,7 +58,7 @@ public class DbReader {
             book.setPublisher(rs.getString("publisher"));
             book.setYear(rs.getString("year"));
             book.setCategory(rs.getString("category"));
-            book.setLoanStatus(rs.getString("loan_status"));
+            book.setStatus(rs.getString("status"));
             bookRows.add(book);
         }
     }

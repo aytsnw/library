@@ -2,7 +2,6 @@ package com.aytsnw.routes;
 
 import com.aytsnw.core.Route;
 import com.aytsnw.db.DbWriter;
-import com.aytsnw.devices.ScreenDisplayer;
 import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.models.Transaction;
 
@@ -22,7 +21,7 @@ public class BorrowBookRoute extends Route {
         tran.setUserId((Integer) screenParams.get("user_id"));
         tran.setBookId((Integer) screenParams.get("book_id"));
         try{
-            DbWriter.updateLoanStatus(tran);
+            DbWriter.updateBookStatus(tran);
         } catch (SQLException | InvalidInputException ex){
             System.out.println("SQL Error: Couldn't execute loan.");
             System.out.println(ex.getMessage());

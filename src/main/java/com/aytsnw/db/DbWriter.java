@@ -1,21 +1,18 @@
 package com.aytsnw.db;
 
-import com.aytsnw.app.Initializer;
 import com.aytsnw.exceptions.BadArgumentException;
-import com.aytsnw.exceptions.InvalidInputException;
 import com.aytsnw.models.Book;
 import com.aytsnw.models.Transaction;
 import com.aytsnw.models.User;
 
 import java.sql.*;
-import java.util.HashMap;
 
 public class DbWriter {
     private static PreparedStatement stmt = null;
     private static final Connection conn = DbManager.conn;
 
     public static void writeToBooks(Book book) throws SQLException {
-        String sql = "INSERT INTO books (title, author, isbn, publisher, year, category, loan_status)" +
+        String sql = "INSERT INTO books (title, author, isbn, publisher, year, category, status)" +
                 " VALUES(?, ?, ?, ?, ?, ?, 'available')";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, book.getTitle());
@@ -47,28 +44,28 @@ public class DbWriter {
         stmt.executeUpdate();
     }
 
-    public static void deleteFromBooks(String id) throws SQLException{
-        String sql = "DELETE FROM books WHERE id = ?";
+    public static void deleteFromBooks(Integer id) throws SQLException{
+        String sql = "DELETE FROM users_books WHERE book_id = ?";
         stmt = conn.prepareStatement(sql);
-        stmt.setString(1, id);
+        stmt.setInt(1, id);
         stmt.executeUpdate();
 
-        sql = "DELETE FROM users_books WHERE book_id = ?";
+        sql = "UPDATE books SET status = 'inactive' WHERE id = ?";
         stmt = conn.prepareStatement(sql);
-        stmt.setString(1, id);
+        stmt.setInt(1, id);
         stmt.executeUpdate();
     }
 
-    public static void updateLoanStatus(Transaction tran) throws SQLException{
+    public static void updateBookStatus(Transaction tran) throws SQLException{
         Statement stmt = conn.createStatement();
         switch (tran.getType()){
             case "borrow" ->{
-                stmt.executeUpdate("UPDATE books SET loan_status = 'loaned' WHERE id = %s".formatted(tran.getBookId()));
+                stmt.executeUpdate("UPDATE books SET status = 'loaned' WHERE id = %s".formatted(tran.getBookId()));
                 stmt.executeUpdate("INSERT INTO users_books (user_id, book_id) VALUES(%s, %s)".formatted(tran.getUserId(), tran.getBookId()));
                 writeToTransactions(tran);
             }
             case "return" ->{
-                stmt.executeUpdate("UPDATE books SET loan_status = 'available' WHERE id = %s".formatted(tran.getBookId()));
+                stmt.executeUpdate("UPDATE books SET status = 'available' WHERE id = %s".formatted(tran.getBookId()));
                 stmt.executeUpdate("DELETE FROM users_books WHERE user_id = %s AND book_id = %s".formatted(tran.getUserId(), tran.getBookId()));
                 writeToTransactions(tran);
             }

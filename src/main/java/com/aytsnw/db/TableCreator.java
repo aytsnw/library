@@ -14,7 +14,7 @@ public class TableCreator {
                 "publisher TEXT," +
                 "year INTEGER NOT NULL," +
                 "category TEXT," +
-                "loan_status TEXT NOT NULL)");
+                "status TEXT NOT NULL)");
         System.out.println("Table: 'books' created or already exists.");
     }
 
